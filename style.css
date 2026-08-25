@@ -322,3 +322,150 @@ h1 {
         grid-template-columns: 1fr;
     }
 }
+.city-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    text-align: left;
+}
+
+.world-switcher {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.world-switcher button {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    color: white;
+    font-size: 18px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, .07);
+}
+
+.world-switcher span {
+    min-width: 75px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.locked-message {
+    margin-top: 35px;
+    padding: 50px 20px;
+    border: 1px dashed var(--border);
+    border-radius: 20px;
+    color: #ffcc66;
+    font-weight: 900;
+    font-size: 22px;
+}
+
+.locked-message p {
+    margin-top: 15px;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.city-building {
+    min-height: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 18px;
+    border: 1px solid rgba(124, 92, 255, .3);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(124, 92, 255, .18),
+            rgba(0, 229, 255, .08)
+        );
+}
+
+.building-icon {
+    font-size: 48px;
+}
+
+.building-name {
+    margin-top: 8px;
+    font-weight: 800;
+    font-size: 13px;
+}
+
+.building-shop {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(150px, 1fr)
+        );
+    gap: 12px;
+}
+
+.building-button {
+    cursor: pointer;
+    min-height: 140px;
+    padding: 15px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, .05);
+    transition:
+        transform .2s,
+        background .2s;
+}
+
+.building-button:hover {
+    transform: translateY(-4px);
+    background: rgba(124, 92, 255, .15);
+}
+
+.shop-icon {
+    font-size: 34px;
+}
+
+.shop-name {
+    font-weight: 800;
+}
+
+.shop-price {
+    color: #ffd86b;
+    font-size: 13px;
+}
+
+.reward-preview {
+    margin: 25px 0;
+    padding: 15px;
+    border-radius: 14px;
+    color: #ffd86b;
+    border: 1px solid rgba(255, 216, 107, .25);
+    background: rgba(255, 216, 107, .07);
+    font-weight: 900;
+}
+
+@media (max-width: 600px) {
+
+    .city-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .building-shop {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
