@@ -2,7 +2,7 @@
 
 /* =====================================================
    CITY QUEST
-   CORE GAME ENGINE
+   MAIN GAME ENGINE
 ===================================================== */
 
 
@@ -207,7 +207,9 @@ let countdownTimer = null;
 ===================================================== */
 
 function get(id) {
+
     return document.getElementById(id);
+
 }
 
 
@@ -218,6 +220,7 @@ function get(id) {
 function createDefaultSave() {
 
     return {
+
         coins: 0,
 
         level: 1,
@@ -230,13 +233,14 @@ function createDefaultSave() {
             3: [],
             4: []
         }
+
     };
 
 }
 
 
 /* =====================================================
-   LOAD
+   LOAD GAME
 ===================================================== */
 
 function loadGame() {
@@ -249,7 +253,9 @@ function loadGame() {
             );
 
         if (!saved) {
+
             return;
+
         }
 
         const parsed =
@@ -259,7 +265,9 @@ function loadGame() {
             !parsed ||
             typeof parsed !== "object"
         ) {
+
             return;
+
         }
 
         game.coins =
@@ -281,6 +289,7 @@ function loadGame() {
                     parsed.highestLevelCompleted
                 ) || 0
             );
+
 
         if (
             parsed.cities &&
@@ -332,7 +341,7 @@ function loadGame() {
 
 
 /* =====================================================
-   SAVE
+   SAVE GAME
 ===================================================== */
 
 function saveGame() {
@@ -398,9 +407,7 @@ function isWorldUnlocked(world) {
 function getReward(level) {
 
     const world =
-        getWorldForLevel(
-            level
-        );
+        getWorldForLevel(level);
 
     const difficulty =
         Math.floor(
@@ -514,6 +521,7 @@ function showScreen(screen) {
     get("cityScreen")
         .classList.add("hidden");
 
+
     screen
         .classList.remove("hidden");
 
@@ -599,21 +607,32 @@ function createChallenge(level) {
             ) + 1
         );
 
+
     const types = [
+
         "target",
-        "memory",
+
+        "bomb",
+
         "reaction",
+
         "dodge",
+
         "safe",
+
         "sequence",
+
         "survival"
+
     ];
+
 
     const type =
         types[
             (level - 1) %
             types.length
         ];
+
 
     const variation =
         level % 6;
@@ -642,14 +661,6 @@ function createChallenge(level) {
             5 +
             difficulty * 2 +
             variation,
-
-        sequence:
-            Math.min(
-                4 +
-                difficulty +
-                variation,
-                14
-            ),
 
         reactions:
             2 +
@@ -694,17 +705,15 @@ function createChallenge(level) {
    CHALLENGE NAME
 ===================================================== */
 
-function getChallengeName(
-    challenge
-) {
+function getChallengeName(challenge) {
 
     const names = {
 
         target:
             "🎯 TARGET RUSH",
 
-        memory:
-            "🧠 MEMORY MATRIX",
+        bomb:
+            "💣 BOMB DEFUSER",
 
         reaction:
             "⚡ LIGHTNING REACTION",
@@ -722,6 +731,7 @@ function getChallengeName(
             "🔥 SURVIVAL STORM"
 
     };
+
 
     return (
         names[
@@ -753,8 +763,10 @@ function startLevel() {
     get("challengeArena")
         .innerHTML = "";
 
+
     get("challengeControls")
         .innerHTML = "";
+
 
     get("challengeMessage")
         .textContent = "";
@@ -784,6 +796,7 @@ function startLevel() {
 
     let count = 3;
 
+
     get("challengeIntro")
         .textContent =
         count;
@@ -794,6 +807,7 @@ function startLevel() {
             () => {
 
                 count--;
+
 
                 if (
                     count > 0
@@ -813,10 +827,12 @@ function startLevel() {
                     countdownTimer =
                         null;
 
+
                     get(
                         "challengeIntro"
                     ).textContent =
                         "GO!";
+
 
                     launchChallenge(
                         currentChallenge
@@ -832,57 +848,75 @@ function startLevel() {
 
 
 /* =====================================================
-   LAUNCH
+   LAUNCH CHALLENGE
 ===================================================== */
 
-function launchChallenge(
-    challenge
-) {
+function launchChallenge(challenge) {
 
     switch (
         challenge.type
     ) {
 
         case "target":
+
             launchTarget(
                 challenge
             );
+
             break;
 
-        case "memory":
-            launchMemory(
+
+        case "bomb":
+
+            launchBombDefuser(
                 challenge
             );
+
             break;
 
+
         case "reaction":
+
             launchReaction(
                 challenge
             );
+
             break;
 
+
         case "dodge":
+
             launchDodge(
                 challenge
             );
+
             break;
 
+
         case "safe":
+
             launchSafe(
                 challenge
             );
+
             break;
 
+
         case "sequence":
+
             launchSequence(
                 challenge
             );
+
             break;
 
+
         case "survival":
+
             launchSurvival(
                 challenge
             );
+
             break;
 
     }
@@ -891,12 +925,10 @@ function launchChallenge(
 
 
 /* =====================================================
-   TARGET
+   TARGET RUSH
 ===================================================== */
 
-function launchTarget(
-    challenge
-) {
+function launchTarget(challenge) {
 
     let hits = 0;
 
@@ -906,11 +938,14 @@ function launchTarget(
             "button"
         );
 
+
     target.className =
         "challenge-target";
 
+
     target.type =
         "button";
+
 
     target.textContent =
         "🎯";
@@ -927,8 +962,11 @@ function launchTarget(
         if (
             challengeFinished
         ) {
+
             return;
+
         }
+
 
         const arena =
             get("challengeArena");
@@ -972,11 +1010,14 @@ function launchTarget(
             if (
                 challengeFinished
             ) {
+
                 return;
+
             }
 
 
             hits++;
+
 
             get("combo")
                 .textContent =
@@ -1004,6 +1045,7 @@ function launchTarget(
 
     move();
 
+
     startTimer(
         challenge.time
     );
@@ -1012,174 +1054,297 @@ function launchTarget(
 
 
 /* =====================================================
-   MEMORY
+   BOMB DEFUSER
 ===================================================== */
 
-function launchMemory(
-    challenge
-) {
+function launchBombDefuser(challenge) {
 
     const arena =
         get("challengeArena");
 
 
-    const size = 4;
-
-    const total =
-        size * size;
+    arena.innerHTML =
+        "";
 
 
     arena.style.display =
-        "grid";
+        "block";
 
-    arena.style.gridTemplateColumns =
-        `repeat(${size}, 1fr)`;
-
-    arena.style.gap =
-        "10px";
 
     arena.style.padding =
-        "30px";
+        "20px";
 
 
-    const buttons = [];
+    let round = 0;
 
 
-    for (
-        let i = 0;
-        i < total;
-        i++
-    ) {
-
-        const button =
-            document.createElement(
-                "button"
-            );
-
-        button.type =
-            "button";
-
-        button.className =
-            "memory-button";
-
-        button.textContent =
-            "?";
+    let currentBomb =
+        null;
 
 
-        arena.appendChild(
-            button
+    let roundTimeout =
+        null;
+
+
+    let roundInterval =
+        null;
+
+
+    const title =
+        document.createElement(
+            "div"
         );
 
-        buttons.push(
-            button
+
+    title.style.textAlign =
+        "center";
+
+
+    title.style.fontSize =
+        "55px";
+
+
+    title.style.marginTop =
+        "20px";
+
+
+    title.textContent =
+        "💣";
+
+
+    arena.appendChild(
+        title
+    );
+
+
+    const instruction =
+        document.createElement(
+            "div"
         );
 
-    }
+
+    instruction.style.textAlign =
+        "center";
 
 
-    const sequence = [];
+    instruction.style.fontSize =
+        "20px";
 
 
-    while (
-        sequence.length <
-        challenge.sequence
-    ) {
+    instruction.style.fontWeight =
+        "1000";
 
-        const index =
-            Math.floor(
-                Math.random() *
-                total
+
+    instruction.style.margin =
+        "15px";
+
+
+    arena.appendChild(
+        instruction
+    );
+
+
+    const wires =
+        document.createElement(
+            "div"
+        );
+
+
+    wires.style.display =
+        "grid";
+
+
+    wires.style.gridTemplateColumns =
+        "repeat(2, minmax(100px, 1fr))";
+
+
+    wires.style.gap =
+        "15px";
+
+
+    wires.style.maxWidth =
+        "500px";
+
+
+    wires.style.margin =
+        "25px auto";
+
+
+    arena.appendChild(
+        wires
+    );
+
+
+    const colors = [
+
+        {
+            name: "RED",
+            emoji: "🔴"
+        },
+
+        {
+            name: "BLUE",
+            emoji: "🔵"
+        },
+
+        {
+            name: "GREEN",
+            emoji: "🟢"
+        },
+
+        {
+            name: "YELLOW",
+            emoji: "🟡"
+        },
+
+        {
+            name: "PURPLE",
+            emoji: "🟣"
+        },
+
+        {
+            name: "ORANGE",
+            emoji: "🟠"
+        }
+
+    ];
+
+
+    function clearRoundTimers() {
+
+        if (
+            roundTimeout !==
+            null
+        ) {
+
+            clearTimeout(
+                roundTimeout
             );
+
+            roundTimeout =
+                null;
+
+        }
 
 
         if (
-            !sequence.includes(
-                index
-            )
+            roundInterval !==
+            null
         ) {
 
-            sequence.push(
-                index
+            clearInterval(
+                roundInterval
             );
+
+            roundInterval =
+                null;
 
         }
 
     }
 
 
-    let showing = 0;
-
-
-    function showNext() {
+    function startRound() {
 
         if (
-            showing >=
-            sequence.length
+            challengeFinished
         ) {
-
-            buttons.forEach(
-                button => {
-                    button.textContent =
-                        "•";
-                }
-            );
-
-            enableInput();
 
             return;
 
         }
 
 
-        const button =
-            buttons[
-                sequence[
-                    showing
-                ]
+        clearRoundTimers();
+
+
+        wires.innerHTML =
+            "";
+
+
+        const wireCount =
+            Math.min(
+                6,
+                3 +
+                Math.floor(
+                    challenge.difficulty / 2
+                )
+            );
+
+
+        const shuffled =
+            [...colors]
+                .sort(
+                    () =>
+                        Math.random() - 0.5
+                )
+                .slice(
+                    0,
+                    wireCount
+                );
+
+
+        const correct =
+            shuffled[
+                Math.floor(
+                    Math.random() *
+                    shuffled.length
+                )
             ];
 
 
-        button.classList.add(
-            "active"
-        );
+        currentBomb =
+            correct;
 
 
-        setTimeout(
-            () => {
+        const instructions = [
 
-                button.classList.remove(
-                    "active"
-                );
+            `CUT THE ${correct.name} WIRE!`,
 
-                showing++;
+            `DISARM USING ${correct.name}!`,
 
-                setTimeout(
-                    showNext,
-                    150
-                );
+            `FIND ${correct.name}!`
 
-            },
-            Math.max(
-                260,
-                650 -
-                challenge.difficulty *
-                30
-            )
-        );
-
-    }
+        ];
 
 
-    let inputIndex = 0;
+        instruction.textContent =
+            instructions[
+                Math.floor(
+                    Math.random() *
+                    instructions.length
+                )
+            ];
 
 
-    function enableInput() {
+        shuffled.forEach(
+            color => {
 
-        buttons.forEach(
-            (
-                button,
-                index
-            ) => {
+                const button =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                button.type =
+                    "button";
+
+
+                button.className =
+                    "challenge-action";
+
+
+                button.style.minHeight =
+                    "75px";
+
+
+                button.style.fontSize =
+                    "18px";
+
+
+                button.textContent =
+                    `${color.emoji} ${color.name}`;
+
 
                 button.onclick =
                     () => {
@@ -1187,82 +1352,180 @@ function launchMemory(
                         if (
                             challengeFinished
                         ) {
+
                             return;
+
                         }
 
 
+                        clearRoundTimers();
+
+
                         if (
-                            index ===
-                            sequence[
-                                inputIndex
-                            ]
+                            color.name ===
+                            currentBomb.name
                         ) {
 
-                            button.classList.add(
-                                "active"
-                            );
-
-
-                            setTimeout(
-                                () => {
-
-                                    button.classList.remove(
-                                        "active"
-                                    );
-
-                                },
-                                130
-                            );
-
-
-                            inputIndex++;
+                            round++;
 
 
                             get("combo")
                                 .textContent =
-                                inputIndex;
+                                round;
 
 
                             if (
-                                inputIndex >=
-                                sequence.length
+                                round >=
+                                challenge.rounds
                             ) {
 
                                 winLevel(
-                                    inputIndex
+                                    round
                                 );
+
+                                return;
 
                             }
 
+
+                            showToast(
+                                "⚡ CORRECT WIRE!"
+                            );
+
+
+                            startRound();
+
                         } else {
 
+                            showToast(
+                                "💥 WRONG WIRE!"
+                            );
+
+
                             loseLife();
+
+
+                            if (
+                                !challengeFinished
+                            ) {
+
+                                startRound();
+
+                            }
 
                         }
 
                     };
 
+
+                wires.appendChild(
+                    button
+                );
+
             }
         );
+
+
+        const roundTime =
+            Math.max(
+                1200,
+                4500 -
+                challenge.difficulty *
+                300
+            );
+
+
+        let remaining =
+            roundTime;
+
+
+        get("timer")
+            .textContent =
+            (
+                remaining / 1000
+            ).toFixed(1);
+
+
+        roundInterval =
+            setInterval(
+                () => {
+
+                    if (
+                        challengeFinished
+                    ) {
+
+                        clearRoundTimers();
+
+                        return;
+
+                    }
+
+
+                    remaining -=
+                        100;
+
+
+                    get("timer")
+                        .textContent =
+                        Math.max(
+                            0,
+                            remaining / 1000
+                        ).toFixed(1);
+
+
+                    if (
+                        remaining <= 0
+                    ) {
+
+                        clearRoundTimers();
+
+
+                        showToast(
+                            "💥 TOO SLOW!"
+                        );
+
+
+                        loseLife();
+
+
+                        if (
+                            !challengeFinished
+                        ) {
+
+                            startRound();
+
+                        }
+
+                    }
+
+                },
+                100
+            );
+
+
+        roundTimeout =
+            setTimeout(
+                () => {
+
+                    clearRoundTimers();
+
+                },
+                roundTime
+            );
 
     }
 
 
-    setTimeout(
-        showNext,
-        500
-    );
+    startRound();
 
 }
 
 
 /* =====================================================
-   REACTION
+   LIGHTNING REACTION
 ===================================================== */
 
-function launchReaction(
-    challenge
-) {
+function launchReaction(challenge) {
 
     let round = 0;
 
@@ -1280,11 +1543,14 @@ function launchReaction(
             "button"
         );
 
+
     button.type =
         "button";
 
+
     button.className =
         "challenge-action";
+
 
     button.textContent =
         "WAIT...";
@@ -1301,6 +1567,7 @@ function launchReaction(
         ready = false;
 
         waiting = true;
+
 
         button.textContent =
             "WAIT...";
@@ -1319,13 +1586,16 @@ function launchReaction(
                     if (
                         challengeFinished
                     ) {
+
                         return;
+
                     }
 
 
                     ready = true;
 
                     waiting = false;
+
 
                     button.textContent =
                         "⚡ CLICK!";
@@ -1363,7 +1633,9 @@ function launchReaction(
             if (
                 challengeFinished
             ) {
+
                 return;
+
             }
 
 
@@ -1384,7 +1656,13 @@ function launchReaction(
             );
 
 
+            clearTimeout(
+                signalTimeout
+            );
+
+
             ready = false;
+
 
             round++;
 
@@ -1419,12 +1697,10 @@ function launchReaction(
 
 
 /* =====================================================
-   DODGE
+   DANGER ZONE
 ===================================================== */
 
-function launchDodge(
-    challenge
-) {
+function launchDodge(challenge) {
 
     const arena =
         get("challengeArena");
@@ -1434,6 +1710,7 @@ function launchDodge(
         document.createElement(
             "div"
         );
+
 
     player.className =
         "dodge-player";
@@ -1447,6 +1724,7 @@ function launchDodge(
     let x =
         arena.clientWidth / 2 -
         21;
+
 
     let y =
         arena.clientHeight / 2 -
@@ -1490,6 +1768,7 @@ function launchDodge(
                 "div"
             );
 
+
         enemy.className =
             "dodge-enemy";
 
@@ -1515,30 +1794,31 @@ function launchDodge(
         enemy.vx =
             (
                 Math.random() -
-                .5
+                0.5
             ) *
             (
                 1.5 +
                 challenge.difficulty *
-                .3
+                0.3
             );
 
 
         enemy.vy =
             (
                 Math.random() -
-                .5
+                0.5
             ) *
             (
                 1.5 +
                 challenge.difficulty *
-                .3
+                0.3
             );
 
 
         arena.appendChild(
             enemy
         );
+
 
         enemies.push(
             enemy
@@ -1556,7 +1836,9 @@ function launchDodge(
         if (
             challengeFinished
         ) {
+
             return;
+
         }
 
 
@@ -1582,14 +1864,16 @@ function launchDodge(
         const speed =
             3.5 +
             challenge.difficulty *
-            .3;
+            0.3;
 
 
         if (
             keys.w ||
             keys.arrowup
         ) {
+
             y -= speed;
+
         }
 
 
@@ -1597,7 +1881,9 @@ function launchDodge(
             keys.s ||
             keys.arrowdown
         ) {
+
             y += speed;
+
         }
 
 
@@ -1605,7 +1891,9 @@ function launchDodge(
             keys.a ||
             keys.arrowleft
         ) {
+
             x -= speed;
+
         }
 
 
@@ -1613,7 +1901,9 @@ function launchDodge(
             keys.d ||
             keys.arrowright
         ) {
+
             x += speed;
+
         }
 
 
@@ -1642,6 +1932,7 @@ function launchDodge(
         player.style.left =
             `${x}px`;
 
+
         player.style.top =
             `${y}px`;
 
@@ -1652,6 +1943,7 @@ function launchDodge(
 
             enemy.x +=
                 enemy.vx;
+
 
             enemy.y +=
                 enemy.vy;
@@ -1684,6 +1976,7 @@ function launchDodge(
             enemy.style.left =
                 `${enemy.x}px`;
 
+
             enemy.style.top =
                 `${enemy.y}px`;
 
@@ -1697,6 +1990,7 @@ function launchDodge(
 
                 loseLife();
 
+
                 enemy.x =
                     Math.random() *
                     Math.max(
@@ -1704,6 +1998,7 @@ function launchDodge(
                         arena.clientWidth -
                         30
                     );
+
 
                 enemy.y =
                     Math.random() *
@@ -1746,12 +2041,10 @@ function launchDodge(
 
 
 /* =====================================================
-   SAFE
+   FIND THE SAFE ONE
 ===================================================== */
 
-function launchSafe(
-    challenge
-) {
+function launchSafe(challenge) {
 
     let round = 0;
 
@@ -1761,7 +2054,9 @@ function launchSafe(
         if (
             challengeFinished
         ) {
+
             return;
+
         }
 
 
@@ -1798,6 +2093,7 @@ function launchSafe(
                 document.createElement(
                     "button"
                 );
+
 
             button.type =
                 "button";
@@ -1880,12 +2176,10 @@ function launchSafe(
 
 
 /* =====================================================
-   SEQUENCE
+   CODE BREAKER
 ===================================================== */
 
-function launchSequence(
-    challenge
-) {
+function launchSequence(challenge) {
 
     const arena =
         get("challengeArena");
@@ -1895,6 +2189,7 @@ function launchSequence(
         document.createElement(
             "div"
         );
+
 
     display.className =
         "number-display";
@@ -1910,14 +2205,18 @@ function launchSequence(
             "input"
         );
 
+
     input.type =
         "text";
+
 
     input.inputMode =
         "numeric";
 
+
     input.placeholder =
         "ENTER THE CODE";
+
 
     input.className =
         "challenge-action";
@@ -1952,6 +2251,15 @@ function launchSequence(
 
     function showNext() {
 
+        if (
+            challengeFinished
+        ) {
+
+            return;
+
+        }
+
+
         display.textContent =
             sequence[index];
 
@@ -1961,6 +2269,7 @@ function launchSequence(
 
                 display.textContent =
                     "•";
+
 
                 index++;
 
@@ -2000,7 +2309,9 @@ function launchSequence(
                 event.key !==
                 "Enter"
             ) {
+
                 return;
+
             }
 
 
@@ -2034,12 +2345,10 @@ function launchSequence(
 
 
 /* =====================================================
-   SURVIVAL
+   SURVIVAL STORM
 ===================================================== */
 
-function launchSurvival(
-    challenge
-) {
+function launchSurvival(challenge) {
 
     let remaining =
         challenge.time;
@@ -2053,11 +2362,14 @@ function launchSurvival(
             "button"
         );
 
+
     button.type =
         "button";
 
+
     button.className =
         "challenge-action";
+
 
     button.textContent =
         "⚡ TAP FOR POWER";
@@ -2072,7 +2384,17 @@ function launchSurvival(
     button.onclick =
         () => {
 
+            if (
+                challengeFinished
+            ) {
+
+                return;
+
+            }
+
+
             score++;
+
 
             get("combo")
                 .textContent =
@@ -2081,11 +2403,26 @@ function launchSurvival(
         };
 
 
+    get("timer")
+        .textContent =
+        remaining;
+
+
     challengeTimer =
         setInterval(
             () => {
 
+                if (
+                    challengeFinished
+                ) {
+
+                    return;
+
+                }
+
+
                 remaining--;
+
 
                 get("timer")
                     .textContent =
@@ -2100,8 +2437,10 @@ function launchSurvival(
                         challengeTimer
                     );
 
+
                     challengeTimer =
                         null;
+
 
                     winLevel(
                         score
@@ -2120,9 +2459,7 @@ function launchSurvival(
    TIMER
 ===================================================== */
 
-function startTimer(
-    seconds
-) {
+function startTimer(seconds) {
 
     let remaining =
         seconds;
@@ -2140,7 +2477,9 @@ function startTimer(
                 if (
                     challengeFinished
                 ) {
+
                     return;
+
                 }
 
 
@@ -2160,8 +2499,10 @@ function startTimer(
                         challengeTimer
                     );
 
+
                     challengeTimer =
                         null;
+
 
                     loseLife();
 
@@ -2178,13 +2519,11 @@ function startTimer(
    COLLISION
 ===================================================== */
 
-function collision(
-    a,
-    b
-) {
+function collision(a, b) {
 
     const aRect =
         a.getBoundingClientRect();
+
 
     const bRect =
         b.getBoundingClientRect();
@@ -2217,7 +2556,9 @@ function loseLife() {
         !currentChallenge ||
         challengeFinished
     ) {
+
         return;
+
     }
 
 
@@ -2256,14 +2597,14 @@ function loseLife() {
    WIN LEVEL
 ===================================================== */
 
-function winLevel(
-    score = 1
-) {
+function winLevel(score = 1) {
 
     if (
         challengeFinished
     ) {
+
         return;
+
     }
 
 
@@ -2293,9 +2634,7 @@ function winLevel(
         );
 
 
-    const perfect =
-        currentChallenge &&
-        currentChallenge.lives ===
+    const perfectLives =
         Math.max(
             1,
             4 -
@@ -2306,10 +2645,15 @@ function winLevel(
         );
 
 
+    const perfect =
+        currentChallenge.lives ===
+        perfectLives;
+
+
     const perfectBonus =
         perfect
             ? Math.floor(
-                baseReward * .25
+                baseReward * 0.25
             )
             : 0;
 
@@ -2344,6 +2688,7 @@ function winLevel(
 
     saveGame();
 
+
     updateUI();
 
 
@@ -2365,7 +2710,7 @@ function winLevel(
     ) {
 
         showToast(
-            `🌍 WORLD ${completed / 50 + 1} UNLOCKED! +${total.toLocaleString()} 🪙`
+            `🌍 NEW WORLD UNLOCKED! +${total.toLocaleString()} 🪙`
         );
 
     } else {
@@ -2436,12 +2781,11 @@ function failLevel() {
    TOAST
 ===================================================== */
 
-let toastTimeout = null;
+let toastTimeout =
+    null;
 
 
-function showToast(
-    message
-) {
+function showToast(message) {
 
     const element =
         get("toast");
@@ -2477,7 +2821,7 @@ function showToast(
 
 
 /* =====================================================
-   CITY
+   CITY THEME
 ===================================================== */
 
 function updateCityTheme() {
@@ -2487,15 +2831,20 @@ function updateCityTheme() {
 
 
     if (!map) {
+
         return;
+
     }
 
 
     const themes = {
 
         1: "theme-neon",
+
         2: "theme-tropical",
+
         3: "theme-frost",
+
         4: "theme-space"
 
     };
@@ -2528,7 +2877,9 @@ function renderCity() {
 
 
     if (!world) {
+
         return;
+
     }
 
 
@@ -2539,7 +2890,10 @@ function renderCity() {
         .textContent =
         `WORLD ${
             String(world.id)
-                .padStart(2, "0")
+                .padStart(
+                    2,
+                    "0"
+                )
         }`;
 
 
@@ -2577,7 +2931,7 @@ function renderCity() {
 
         get("unlockRequirement")
             .textContent =
-            `Reach level ${world.unlock + 1} to unlock this world.`;
+            `Complete level ${world.unlock} to unlock this world.`;
 
         return;
 
@@ -2588,6 +2942,7 @@ function renderCity() {
         world
     );
 
+
     renderBuildingShop(
         world
     );
@@ -2596,12 +2951,10 @@ function renderCity() {
 
 
 /* =====================================================
-   BUILDINGS
+   RENDER BUILDINGS
 ===================================================== */
 
-function renderBuildings(
-    world
-) {
+function renderBuildings(world) {
 
     const grid =
         get("cityGrid");
@@ -2646,17 +2999,21 @@ function renderBuildings(
             slot.innerHTML =
                 "🏗️";
 
+
             slot.style.display =
                 "flex";
+
 
             slot.style.alignItems =
                 "center";
 
+
             slot.style.justifyContent =
                 "center";
 
+
             slot.style.opacity =
-                ".35";
+                "0.35";
 
         } else {
 
@@ -2669,7 +3026,9 @@ function renderBuildings(
 
 
             if (!building) {
+
                 continue;
+
             }
 
 
@@ -2678,6 +3037,7 @@ function renderBuildings(
 
 
             slot.innerHTML = `
+
                 <div class="building-icon">
                     ${building.icon}
                 </div>
@@ -2685,6 +3045,7 @@ function renderBuildings(
                 <div class="building-name">
                     ${building.name}
                 </div>
+
             `;
 
         }
@@ -2703,9 +3064,7 @@ function renderBuildings(
    BUILDING SHOP
 ===================================================== */
 
-function renderBuildingShop(
-    world
-) {
+function renderBuildingShop(world) {
 
     const shop =
         get("buildingShop");
@@ -2741,6 +3100,7 @@ function renderBuildingShop(
 
 
         card.innerHTML = `
+
             <div class="building-icon">
                 ${building.icon}
             </div>
@@ -2752,6 +3112,7 @@ function renderBuildingShop(
             <div>
                 ${building.price.toLocaleString()} 🪙
             </div>
+
         `;
 
 
@@ -2814,7 +3175,9 @@ function buyBuilding(
             world
         )
     ) {
+
         return;
+
     }
 
 
@@ -2870,7 +3233,9 @@ function buyBuilding(
 
     saveGame();
 
+
     updateUI();
+
 
     renderCity();
 
@@ -2897,7 +3262,9 @@ function setupEvents() {
                     get("gameScreen")
                 );
 
+
                 updateUI();
+
 
                 startLevel();
 
@@ -2915,9 +3282,11 @@ function setupEvents() {
                         game.level
                     ).id;
 
+
                 showScreen(
                     get("cityScreen")
                 );
+
 
                 renderCity();
 
@@ -2931,6 +3300,7 @@ function setupEvents() {
             () => {
 
                 stopChallenge();
+
 
                 showScreen(
                     get("homeScreen")
@@ -2964,6 +3334,7 @@ function setupEvents() {
                         selectedWorldId - 1
                     );
 
+
                 renderCity();
 
             }
@@ -2981,6 +3352,7 @@ function setupEvents() {
                         selectedWorldId + 1
                     );
 
+
                 renderCity();
 
             }
@@ -2990,7 +3362,7 @@ function setupEvents() {
 
 
 /* =====================================================
-   START
+   START GAME
 ===================================================== */
 
 function startGame() {
@@ -3007,9 +3379,11 @@ function startGame() {
 
 
 startGame();
-/* =========================================
+
+
+/* =====================================================
    SERVICE WORKER
-========================================= */
+===================================================== */
 
 if (
     "serviceWorker" in navigator
