@@ -814,7 +814,33 @@ function winLevel() {
 
 
 /* CITY */
+function updateCityTheme() {
 
+    const cityMap =
+        document.getElementById(
+            "cityMap"
+        );
+
+    if (!cityMap) {
+        return;
+    }
+
+    cityMap.className =
+        "city-map";
+
+    const themes = {
+        1: "theme-neon",
+        2: "theme-tropical",
+        3: "theme-frost",
+        4: "theme-space"
+    };
+
+    cityMap.classList.add(
+        themes[selectedWorldId] ||
+        "theme-neon"
+    );
+
+}
 function renderCity() {
 
     const world =
@@ -824,6 +850,7 @@ function renderCity() {
 
     if (!world) return;
 
+updateCityTheme();
     const number =
         String(world.id).padStart(
             2,
