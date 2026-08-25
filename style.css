@@ -534,3 +534,360 @@ h1 {
 #mathAnswer:focus {
     border-color: var(--accent);
 }
+/* =====================================================
+   PART 5 — CITY MAPS
+===================================================== */
+
+.city-map {
+    position: relative;
+    min-height: 560px;
+    margin-top: 30px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 25px;
+    isolation: isolate;
+}
+
+
+/* SKY */
+
+.city-sky {
+    position: absolute;
+    inset: 0;
+    z-index: -5;
+}
+
+
+/* GROUND */
+
+.city-ground {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 45%;
+    z-index: -4;
+}
+
+
+/* NEON CITY */
+
+.theme-neon .city-sky {
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(124,92,255,.4),
+            transparent 30%
+        ),
+        linear-gradient(
+            #080d2c,
+            #16114a
+        );
+}
+
+.theme-neon .city-ground {
+    background:
+        linear-gradient(
+            rgba(124,92,255,.08),
+            rgba(0,0,0,.4)
+        ),
+        #0a1020;
+}
+
+
+/* TROPICAL CITY */
+
+.theme-tropical .city-sky {
+    background:
+        radial-gradient(
+            circle at 70% 20%,
+            rgba(255,218,100,.8),
+            transparent 8%
+        ),
+        linear-gradient(
+            #ff9d66,
+            #ffcf8a
+        );
+}
+
+.theme-tropical .city-ground {
+    background:
+        linear-gradient(
+            #44c3a8,
+            #187a65
+        );
+}
+
+
+/* FROST CITY */
+
+.theme-frost .city-sky {
+    background:
+        linear-gradient(
+            #7cc8ff,
+            #e8f8ff
+        );
+}
+
+.theme-frost .city-ground {
+    background:
+        linear-gradient(
+            #ffffff,
+            #bce8ff
+        );
+}
+
+
+/* SPACE CITY */
+
+.theme-space .city-sky {
+    background:
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(125,88,255,.7),
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 80% 15%,
+            rgba(255,255,255,.8),
+            transparent 2px
+        ),
+        linear-gradient(
+            #010108,
+            #10102c
+        );
+}
+
+.theme-space .city-ground {
+    background:
+        radial-gradient(
+            circle,
+            #5b5b6d,
+            #171720
+        );
+}
+
+
+/* ROADS */
+
+.road {
+    position: absolute;
+    z-index: 1;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent 0 30px,
+            rgba(255,255,255,.65)
+            30px 45px,
+            transparent 45px 70px
+        ),
+        #252936;
+    opacity: .9;
+}
+
+.road-horizontal {
+    left: 0;
+    width: 100%;
+    height: 55px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.road-vertical {
+    top: 0;
+    bottom: 0;
+    width: 55px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+/* CITY GRID */
+
+.city-map .city-grid {
+    position: relative;
+    z-index: 3;
+    margin: 0;
+    padding: 30px;
+    min-height: 560px;
+    grid-template-columns:
+        repeat(4, 1fr);
+    gap: 35px;
+}
+
+
+/* BUILDING PLOTS */
+
+.city-map .empty-plot,
+.city-map .city-building {
+    min-height: 190px;
+    position: relative;
+    z-index: 4;
+}
+
+
+/* REAL BUILDINGS */
+
+.city-map .city-building {
+    justify-content: end;
+    overflow: hidden;
+    border: 0;
+    box-shadow:
+        inset 0 -8px 0 rgba(0,0,0,.25),
+        0 15px 30px rgba(0,0,0,.25);
+}
+
+.city-map .city-building::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 20%;
+    width: 60%;
+    height: 80%;
+    z-index: -1;
+    border-radius: 8px 8px 0 0;
+}
+
+
+/* NEON BUILDINGS */
+
+.theme-neon .city-building::before {
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #0b0d20 0 12px,
+            #29eaff 12px 16px
+        ),
+        linear-gradient(
+            #283879,
+            #101329
+        );
+
+    box-shadow:
+        0 0 20px #29eaff;
+}
+
+
+/* TROPICAL BUILDINGS */
+
+.theme-tropical .city-building::before {
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #fff3c7 0 16px,
+            #ffb86a 16px 20px
+        ),
+        linear-gradient(
+            #ffb166,
+            #e8783e
+        );
+}
+
+
+/* FROST BUILDINGS */
+
+.theme-frost .city-building::before {
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #dff8ff 0 14px,
+            #7fcfff 14px 18px
+        ),
+        linear-gradient(
+            #c9f2ff,
+            #7cc7e8
+        );
+}
+
+
+/* SPACE BUILDINGS */
+
+.theme-space .city-building::before {
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #1a1b33 0 12px,
+            #d26cff 12px 16px
+        ),
+        linear-gradient(
+            #464477,
+            #141420
+        );
+
+    box-shadow:
+        0 0 25px #d26cff;
+}
+
+
+/* BUILDING ICON */
+
+.city-map .building-icon {
+    position: relative;
+    z-index: 2;
+    font-size: 48px;
+    filter:
+        drop-shadow(
+            0 5px 5px rgba(0,0,0,.4)
+        );
+}
+
+
+/* BUILDING NAME */
+
+.city-map .building-name {
+    position: relative;
+    z-index: 2;
+    margin: 15px 10px 10px;
+    padding: 6px;
+    border-radius: 8px;
+    background: rgba(0,0,0,.35);
+}
+
+
+/* WORLD THEMES */
+
+.theme-neon {
+    box-shadow:
+        inset 0 0 100px rgba(124,92,255,.2);
+}
+
+.theme-tropical {
+    box-shadow:
+        inset 0 0 100px rgba(0,255,180,.15);
+}
+
+.theme-frost {
+    box-shadow:
+        inset 0 0 100px rgba(150,220,255,.3);
+}
+
+.theme-space {
+    box-shadow:
+        inset 0 0 100px rgba(160,100,255,.2);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+    .city-map {
+        min-height: 850px;
+    }
+
+    .city-map .city-grid {
+        min-height: 850px;
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .road-vertical {
+        display: none;
+    }
+
+    .city-map .empty-plot,
+    .city-map .city-building {
+        min-height: 150px;
+    }
+
+}
