@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#080b18">
+
+    <title>City Quest</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="app">
+
+        <header class="topbar">
+            <div class="logo">
+                <span>🏙️</span>
+                CITY QUEST
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <span>🪙</span>
+                    <span id="coins">0</span>
+                </div>
+
+                <div class="stat">
+                    <span>⭐</span>
+                    <span>LVL <span id="level">1</span></span>
+                </div>
+            </div>
+        </header>
+
+        <main class="hero">
+
+            <div class="hero-content">
+
+                <div class="world-badge">
+                    WORLD 01
+                </div>
+
+                <h1>NEON CITY</h1>
+
+                <p>
+                    Beat levels. Earn coins. Build your city.
+                </p>
+
+                <div class="buttons">
+                    <button id="playButton" class="primary-button">
+                        PLAY
+                        <span>▶</span>
+                    </button>
+
+                    <button id="cityButton" class="secondary-button">
+                        MY CITY
+                        <span>🏙️</span>
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="city-preview">
+                <div class="skyline">
+                    <div class="building b1"></div>
+                    <div class="building b2"></div>
+                    <div class="building b3"></div>
+                    <div class="building b4"></div>
+                    <div class="building b5"></div>
+                </div>
+
+                <div class="ground"></div>
+            </div>
+
+        </main>
+
+        <section id="gameScreen" class="screen hidden">
+
+            <button id="backButton" class="back-button">
+                ← BACK
+            </button>
+
+            <div class="game-card">
+
+                <div class="world-badge">
+                    LEVEL <span id="currentLevel">1</span>
+                </div>
+
+                <h2>READY?</h2>
+
+                <p>
+                    Complete the challenge to earn coins.
+                </p>
+
+                <button id="completeButton" class="primary-button">
+                    COMPLETE LEVEL ⚡
+                </button>
+
+            </div>
+
+        </section>
+
+        <section id="cityScreen" class="screen hidden">
+
+            <button id="cityBackButton" class="back-button">
+                ← BACK
+            </button>
+
+            <div class="city-card">
+
+                <div>
+                    <span class="world-badge">YOUR CITY</span>
+                    <h2>NEON CITY</h2>
+                </div>
+
+                <div id="cityGrid" class="city-grid">
+
+                    <div class="empty-plot">
+                        🔒
+                    </div>
+
+                    <div class="empty-plot">
+                        🔒
+                    </div>
+
+                    <div class="empty-plot">
+                        🔒
+                    </div>
+
+                    <div class="empty-plot">
+                        🔒
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
