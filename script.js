@@ -2,7 +2,7 @@
 
 /* =====================================================
    CITY QUEST
-   PART 2 — 200 LEVEL PROGRESSION
+   PART 3 — CITY BUILDING SYSTEM
 ===================================================== */
 
 
@@ -11,59 +11,203 @@
 ===================================================== */
 
 const GAME = {
+
     maxLevel: 200,
 
     worlds: [
+
         {
             id: 1,
             name: "NEON CITY",
             startLevel: 1,
             endLevel: 50,
-            multiplier: 1
+            unlockLevel: 1,
+            multiplier: 1,
+
+            buildings: [
+                {
+                    id: "neon_house",
+                    name: "Neon House",
+                    icon: "🏠",
+                    price: 500
+                },
+                {
+                    id: "neon_shop",
+                    name: "Cyber Shop",
+                    icon: "🏪",
+                    price: 1200
+                },
+                {
+                    id: "neon_park",
+                    name: "Energy Park",
+                    icon: "🌳",
+                    price: 2000
+                },
+                {
+                    id: "neon_tower",
+                    name: "Mega Tower",
+                    icon: "🏢",
+                    price: 5000
+                }
+            ]
         },
+
         {
             id: 2,
             name: "TROPICAL CITY",
             startLevel: 51,
             endLevel: 100,
-            multiplier: 1.5
+            unlockLevel: 50,
+            multiplier: 1.5,
+
+            buildings: [
+                {
+                    id: "beach_house",
+                    name: "Beach House",
+                    icon: "🏖️",
+                    price: 2500
+                },
+                {
+                    id: "resort",
+                    name: "Resort",
+                    icon: "🏝️",
+                    price: 5000
+                },
+                {
+                    id: "water_park",
+                    name: "Water Park",
+                    icon: "🌊",
+                    price: 9000
+                },
+                {
+                    id: "tropical_tower",
+                    name: "Sky Resort",
+                    icon: "🏨",
+                    price: 15000
+                }
+            ]
         },
+
         {
             id: 3,
             name: "FROST CITY",
             startLevel: 101,
             endLevel: 150,
-            multiplier: 2
+            unlockLevel: 100,
+            multiplier: 2,
+
+            buildings: [
+                {
+                    id: "ice_home",
+                    name: "Ice Home",
+                    icon: "🏠",
+                    price: 8000
+                },
+                {
+                    id: "winter_market",
+                    name: "Winter Market",
+                    icon: "🏪",
+                    price: 15000
+                },
+                {
+                    id: "ice_lab",
+                    name: "Ice Lab",
+                    icon: "🔬",
+                    price: 25000
+                },
+                {
+                    id: "crystal_tower",
+                    name: "Crystal Tower",
+                    icon: "🏙️",
+                    price: 40000
+                }
+            ]
         },
+
         {
             id: 4,
             name: "SPACE CITY",
             startLevel: 151,
             endLevel: 200,
-            multiplier: 3
+            unlockLevel: 150,
+            multiplier: 3,
+
+            buildings: [
+                {
+                    id: "space_home",
+                    name: "Space Base",
+                    icon: "🛸",
+                    price: 25000
+                },
+                {
+                    id: "rocket_factory",
+                    name: "Rocket Factory",
+                    icon: "🚀",
+                    price: 50000
+                },
+                {
+                    id: "alien_market",
+                    name: "Alien Market",
+                    icon: "👽",
+                    price: 75000
+                },
+                {
+                    id: "space_station",
+                    name: "Space Station",
+                    icon: "🛰️",
+                    price: 150000
+                }
+            ]
         }
+
     ]
+
 };
 
 
 /* =====================================================
-   DEFAULT SAVE DATA
+   SAVE DATA
 ===================================================== */
 
 const DEFAULT_SAVE = {
+
     coins: 0,
+
     level: 1,
-    highestLevelCompleted: 0
+
+    highestLevelCompleted: 0,
+
+    cities: {
+
+        1: [],
+
+        2: [],
+
+        3: [],
+
+        4: []
+
+    }
+
 };
 
-
-/* =====================================================
-   GAME STATE
-===================================================== */
 
 let game = {
-    ...DEFAULT_SAVE
+
+    ...DEFAULT_SAVE,
+
+    cities: {
+
+        ...DEFAULT_SAVE.cities
+
+    }
+
 };
+
+
+let selectedWorldId = 1;
+
+let toastTimeout = null;
 
 
 /* =====================================================
@@ -79,17 +223,59 @@ const levelElement =
 const currentLevelElement =
     document.getElementById("currentLevel");
 
-const playButton =
-    document.getElementById("playButton");
+const rewardPreview =
+    document.getElementById("rewardPreview");
 
-const cityButton =
-    document.getElementById("cityButton");
+const homeWorldBadge =
+    document.getElementById("homeWorldBadge");
+
+const homeWorldName =
+    document.getElementById("homeWorldName");
+
+const gameWorldBadge =
+    document.getElementById("gameWorldBadge");
+
+const cityWorldBadge =
+    document.getElementById("cityWorldBadge");
+
+const cityWorldName =
+    document.getElementById("cityWorldName");
+
+const selectedWorldNumber =
+    document.getElementById("selectedWorldNumber");
+
+const cityGrid =
+    document.getElementById("cityGrid");
+
+const buildingShop =
+    document.getElementById("buildingShop");
+
+const cityContent =
+    document.getElementById("cityContent");
+
+const lockedWorldMessage =
+    document.getElementById("lockedWorldMessage");
+
+const unlockRequirement =
+    document.getElementById("unlockRequirement");
+
+const homeScreen =
+    document.getElementById("homeScreen");
 
 const gameScreen =
     document.getElementById("gameScreen");
 
 const cityScreen =
     document.getElementById("cityScreen");
+
+const toast =
+    document.getElementById("toast");
+
+const playButton =
+    document.getElementById("playButton");
+
+const cityButton =
+    document.getElementById("cityButton");
 
 const backButton =
     document.getElementById("backButton");
@@ -100,8 +286,11 @@ const cityBackButton =
 const completeButton =
     document.getElementById("completeButton");
 
-const toast =
-    document.getElementById("toast");
+const previousWorldButton =
+    document.getElementById("previousWorldButton");
+
+const nextWorldButton =
+    document.getElementById("nextWorldButton");
 
 
 /* =====================================================
@@ -120,7 +309,7 @@ function saveGame() {
     } catch (error) {
 
         console.error(
-            "Could not save game:",
+            "Save failed:",
             error
         );
 
@@ -134,31 +323,52 @@ function loadGame() {
     try {
 
         const savedGame =
-            localStorage.getItem("cityQuestSave");
+            localStorage.getItem(
+                "cityQuestSave"
+            );
 
         if (!savedGame) {
+
             return;
+
         }
 
         const parsedSave =
             JSON.parse(savedGame);
 
         game = {
-            ...DEFAULT_SAVE,
-            ...parsedSave
-        };
 
-        validateGameData();
+            ...DEFAULT_SAVE,
+
+            ...parsedSave,
+
+            cities: {
+
+                ...DEFAULT_SAVE.cities,
+
+                ...parsedSave.cities
+
+            }
+
+        };
 
     } catch (error) {
 
         console.error(
-            "Could not load save:",
+            "Load failed:",
             error
         );
 
         game = {
-            ...DEFAULT_SAVE
+
+            ...DEFAULT_SAVE,
+
+            cities: {
+
+                ...DEFAULT_SAVE.cities
+
+            }
+
         };
 
     }
@@ -167,77 +377,36 @@ function loadGame() {
 
 
 /* =====================================================
-   DATA VALIDATION
-===================================================== */
-
-function validateGameData() {
-
-    if (
-        typeof game.coins !== "number" ||
-        !Number.isFinite(game.coins) ||
-        game.coins < 0
-    ) {
-        game.coins = 0;
-    }
-
-
-    if (
-        typeof game.level !== "number" ||
-        !Number.isInteger(game.level)
-    ) {
-        game.level = 1;
-    }
-
-
-    game.level = Math.max(
-        1,
-        Math.min(
-            GAME.maxLevel,
-            game.level
-        )
-    );
-
-
-    if (
-        typeof game.highestLevelCompleted !== "number" ||
-        !Number.isInteger(
-            game.highestLevelCompleted
-        )
-    ) {
-        game.highestLevelCompleted = 0;
-    }
-
-
-    game.highestLevelCompleted =
-        Math.max(
-            0,
-            Math.min(
-                GAME.maxLevel,
-                game.highestLevelCompleted
-            )
-        );
-
-}
-
-
-/* =====================================================
-   WORLD SYSTEM
+   WORLD HELPERS
 ===================================================== */
 
 function getWorldFromLevel(level) {
 
-    for (const world of GAME.worlds) {
-
-        if (
+    return GAME.worlds.find(
+        (world) =>
             level >= world.startLevel &&
             level <= world.endLevel
-        ) {
-            return world;
-        }
+    ) || GAME.worlds[0];
 
-    }
+}
 
-    return GAME.worlds[0];
+
+function getWorldById(id) {
+
+    return GAME.worlds.find(
+        (world) =>
+            world.id === id
+    );
+
+}
+
+
+function isWorldUnlocked(world) {
+
+    return (
+        game.highestLevelCompleted >=
+        world.unlockLevel
+    );
 
 }
 
@@ -252,7 +421,7 @@ function getCurrentWorld() {
 
 
 /* =====================================================
-   COIN REWARD SYSTEM
+   COIN REWARDS
 ===================================================== */
 
 function getLevelReward(level) {
@@ -260,41 +429,35 @@ function getLevelReward(level) {
     const world =
         getWorldFromLevel(level);
 
-
     const baseReward =
         100 +
         Math.floor(level * 35);
 
-
-    const worldReward =
+    const reward =
         Math.floor(
             baseReward *
             world.multiplier
         );
 
-
     const milestoneBonus =
         level % 10 === 0
-            ? worldReward
+            ? reward
             : 0;
 
-
-    const worldCompletionBonus =
+    const worldBonus =
         level % 50 === 0
-            ? worldReward * 3
+            ? reward * 3
             : 0;
-
 
     const finalBonus =
-        level === GAME.maxLevel
+        level === 200
             ? 50000
             : 0;
 
-
     return (
-        worldReward +
+        reward +
         milestoneBonus +
-        worldCompletionBonus +
+        worldBonus +
         finalBonus
     );
 
@@ -302,27 +465,26 @@ function getLevelReward(level) {
 
 
 /* =====================================================
-   UI UPDATE
+   UI
 ===================================================== */
 
 function updateUI() {
-
-    validateGameData();
-
 
     coinsElement.textContent =
         Math.floor(
             game.coins
         ).toLocaleString();
 
-
     levelElement.textContent =
         game.level;
-
 
     currentLevelElement.textContent =
         game.level;
 
+    rewardPreview.textContent =
+        `REWARD: ${getLevelReward(
+            game.level
+        ).toLocaleString()} 🪙`;
 
     updateWorldUI();
 
@@ -334,36 +496,383 @@ function updateWorldUI() {
     const world =
         getCurrentWorld();
 
-
-    const worldBadges =
-        document.querySelectorAll(
-            ".world-badge"
+    const worldNumber =
+        String(world.id).padStart(
+            2,
+            "0"
         );
 
+    homeWorldBadge.textContent =
+        `WORLD ${worldNumber}`;
 
-    worldBadges.forEach((badge) => {
+    homeWorldName.textContent =
+        world.name;
 
-        if (
-            !badge.textContent.includes(
-                "LEVEL"
-            )
-        ) {
-            badge.textContent =
-                `WORLD ${String(
-                    world.id
-                ).padStart(2, "0")} — ${world.name}`;
-        }
-
-    });
+    gameWorldBadge.textContent =
+        `WORLD ${worldNumber} — ${world.name}`;
 
 }
 
 
 /* =====================================================
-   SCREEN SYSTEM
+   CITY
+===================================================== */
+
+function renderCity() {
+
+    const world =
+        getWorldById(
+            selectedWorldId
+        );
+
+    if (!world) {
+
+        return;
+
+    }
+
+    const worldNumber =
+        String(world.id).padStart(
+            2,
+            "0"
+        );
+
+    cityWorldBadge.textContent =
+        `WORLD ${worldNumber}`;
+
+    cityWorldName.textContent =
+        world.name;
+
+    selectedWorldNumber.textContent =
+        `WORLD ${world.id}`;
+
+
+    const unlocked =
+        isWorldUnlocked(world);
+
+
+    cityContent.classList.toggle(
+        "hidden",
+        !unlocked
+    );
+
+    lockedWorldMessage.classList.toggle(
+        "hidden",
+        unlocked
+    );
+
+
+    if (!unlocked) {
+
+        unlockRequirement.textContent =
+            `Complete Level ${world.unlockLevel} to unlock ${world.name}.`;
+
+        return;
+
+    }
+
+
+    const buildings =
+        game.cities[world.id] || [];
+
+
+    cityGrid.innerHTML = "";
+
+
+    buildings.forEach(
+        (buildingId) => {
+
+            const building =
+                world.buildings.find(
+                    (item) =>
+                        item.id ===
+                        buildingId
+                );
+
+            if (!building) {
+
+                return;
+
+            }
+
+            const element =
+                document.createElement(
+                    "div"
+                );
+
+            element.className =
+                "city-building";
+
+            element.innerHTML =
+                `
+                <div class="building-icon">
+                    ${building.icon}
+                </div>
+
+                <div class="building-name">
+                    ${building.name}
+                </div>
+                `;
+
+            cityGrid.appendChild(
+                element
+            );
+
+        }
+    );
+
+
+    for (
+        let i = buildings.length;
+        i < 12;
+        i++
+    ) {
+
+        const emptyPlot =
+            document.createElement(
+                "div"
+            );
+
+        emptyPlot.className =
+            "empty-plot";
+
+        emptyPlot.textContent =
+            "+";
+
+        cityGrid.appendChild(
+            emptyPlot
+        );
+
+    }
+
+
+    renderBuildingShop(
+        world
+    );
+
+}
+
+
+function renderBuildingShop(world) {
+
+    buildingShop.innerHTML = "";
+
+
+    world.buildings.forEach(
+        (building) => {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+            button.className =
+                "building-button";
+
+            button.innerHTML =
+                `
+                <span class="shop-icon">
+                    ${building.icon}
+                </span>
+
+                <span class="shop-name">
+                    ${building.name}
+                </span>
+
+                <span class="shop-price">
+                    🪙 ${building.price.toLocaleString()}
+                </span>
+                `;
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    buyBuilding(
+                        world,
+                        building
+                    );
+
+                }
+            );
+
+            buildingShop.appendChild(
+                button
+            );
+
+        }
+    );
+
+}
+
+
+function buyBuilding(
+    world,
+    building
+) {
+
+    if (!isWorldUnlocked(world)) {
+
+        showToast(
+            "🔒 WORLD LOCKED"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        game.coins <
+        building.price
+    ) {
+
+        showToast(
+            "❌ NOT ENOUGH COINS"
+        );
+
+        return;
+
+    }
+
+
+    const city =
+        game.cities[world.id];
+
+
+    if (city.length >= 12) {
+
+        showToast(
+            "🏙️ CITY FULL!"
+        );
+
+        return;
+
+    }
+
+
+    game.coins -=
+        building.price;
+
+
+    city.push(
+        building.id
+    );
+
+
+    saveGame();
+
+    updateUI();
+
+    renderCity();
+
+
+    showToast(
+        `${building.icon} ${building.name} BUILT!`
+    );
+
+}
+
+
+/* =====================================================
+   LEVEL COMPLETION
+===================================================== */
+
+function completeCurrentLevel() {
+
+    if (
+        game.highestLevelCompleted >=
+        GAME.maxLevel
+    ) {
+
+        showToast(
+            "🏆 YOU COMPLETED ALL 200 LEVELS!"
+        );
+
+        return;
+
+    }
+
+
+    const completedLevel =
+        game.level;
+
+    const reward =
+        getLevelReward(
+            completedLevel
+        );
+
+
+    game.coins += reward;
+
+
+    game.highestLevelCompleted =
+        completedLevel;
+
+
+    if (
+        completedLevel <
+        GAME.maxLevel
+    ) {
+
+        game.level++;
+
+    }
+
+
+    saveGame();
+
+    updateUI();
+
+
+    if (
+        completedLevel % 50 === 0 &&
+        completedLevel <
+        GAME.maxLevel
+    ) {
+
+        const newWorld =
+            getCurrentWorld();
+
+        showToast(
+            `🌍 ${newWorld.name} UNLOCKED!`
+        );
+
+        return;
+
+    }
+
+
+    if (
+        completedLevel ===
+        GAME.maxLevel
+    ) {
+
+        showToast(
+            `🏆 ALL 200 LEVELS COMPLETE! +${reward.toLocaleString()} 🪙`
+        );
+
+        return;
+
+    }
+
+
+    showToast(
+        `LEVEL ${completedLevel} COMPLETE! +${reward.toLocaleString()} 🪙`
+    );
+
+}
+
+
+/* =====================================================
+   SCREENS
 ===================================================== */
 
 function showScreen(screen) {
+
+    homeScreen.classList.add(
+        "hidden"
+    );
 
     gameScreen.classList.add(
         "hidden"
@@ -382,26 +891,21 @@ function showScreen(screen) {
 
 
 /* =====================================================
-   TOAST SYSTEM
+   TOAST
 ===================================================== */
-
-let toastTimeout = null;
-
 
 function showToast(message) {
 
     if (toastTimeout) {
 
-        window.clearTimeout(
+        clearTimeout(
             toastTimeout
         );
 
     }
 
-
     toast.textContent =
         message;
-
 
     toast.classList.add(
         "show"
@@ -409,123 +913,22 @@ function showToast(message) {
 
 
     toastTimeout =
-        window.setTimeout(() => {
+        setTimeout(
+            () => {
 
-            toast.classList.remove(
-                "show"
-            );
+                toast.classList.remove(
+                    "show"
+                );
 
-        }, 2600);
+            },
+            2500
+        );
 
 }
 
 
 /* =====================================================
-   LEVEL COMPLETION
-===================================================== */
-
-function completeCurrentLevel() {
-
-    if (
-        game.level >=
-        GAME.maxLevel
-    ) {
-
-        if (
-            game.highestLevelCompleted >=
-            GAME.maxLevel
-        ) {
-
-            showToast(
-                "🏆 ALL 200 LEVELS COMPLETED!"
-            );
-
-            return;
-
-        }
-
-    }
-
-
-    const completedLevel =
-        game.level;
-
-
-    const reward =
-        getLevelReward(
-            completedLevel
-        );
-
-
-    game.coins +=
-        reward;
-
-
-    game.highestLevelCompleted =
-        Math.max(
-            game.highestLevelCompleted,
-            completedLevel
-        );
-
-
-    const worldCompleted =
-        completedLevel % 50 === 0;
-
-
-    if (
-        completedLevel <
-        GAME.maxLevel
-    ) {
-
-        game.level =
-            completedLevel + 1;
-
-    }
-
-
-    saveGame();
-
-    updateUI();
-
-
-    if (
-        completedLevel ===
-        GAME.maxLevel
-    ) {
-
-        showToast(
-            `🏆 FINAL LEVEL COMPLETE! +${reward.toLocaleString()} COINS!`
-        );
-
-        return;
-
-    }
-
-
-    if (worldCompleted) {
-
-        const newWorld =
-            getCurrentWorld();
-
-
-        showToast(
-            `🌍 WORLD UNLOCKED! ${newWorld.name}`
-        );
-
-        return;
-
-    }
-
-
-    showToast(
-        `LEVEL ${completedLevel} COMPLETE! +${reward.toLocaleString()} 🪙`
-    );
-
-}
-
-
-/* =====================================================
-   BUTTON EVENTS
+   EVENTS
 ===================================================== */
 
 playButton.addEventListener(
@@ -546,11 +949,14 @@ cityButton.addEventListener(
     "click",
     () => {
 
+        selectedWorldId =
+            getCurrentWorld().id;
+
         showScreen(
             cityScreen
         );
 
-        updateUI();
+        renderCity();
 
     }
 );
@@ -560,8 +966,8 @@ backButton.addEventListener(
     "click",
     () => {
 
-        gameScreen.classList.add(
-            "hidden"
+        showScreen(
+            homeScreen
         );
 
     }
@@ -572,8 +978,8 @@ cityBackButton.addEventListener(
     "click",
     () => {
 
-        cityScreen.classList.add(
-            "hidden"
+        showScreen(
+            homeScreen
         );
 
     }
@@ -586,8 +992,45 @@ completeButton.addEventListener(
 );
 
 
+previousWorldButton.addEventListener(
+    "click",
+    () => {
+
+        if (
+            selectedWorldId > 1
+        ) {
+
+            selectedWorldId--;
+
+            renderCity();
+
+        }
+
+    }
+);
+
+
+nextWorldButton.addEventListener(
+    "click",
+    () => {
+
+        if (
+            selectedWorldId <
+            GAME.worlds.length
+        ) {
+
+            selectedWorldId++;
+
+            renderCity();
+
+        }
+
+    }
+);
+
+
 /* =====================================================
-   START GAME
+   START
 ===================================================== */
 
 loadGame();
