@@ -469,3 +469,68 @@ h1 {
     }
 
 }
+.challenge {
+    margin-top: 25px;
+}
+
+.target-arena {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    margin-top: 15px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: rgba(255,255,255,.03);
+}
+
+.target-button {
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    cursor: pointer;
+    font-size: 30px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(124,92,255,.2);
+}
+
+.reaction-button {
+    width: 100%;
+    min-height: 200px;
+    margin-top: 20px;
+    cursor: pointer;
+    color: white;
+    font-size: 40px;
+    font-weight: 900;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: rgba(255,255,255,.06);
+}
+
+.reaction-button.ready {
+    background: #00a85a;
+}
+
+.math-question {
+    margin: 20px 0;
+    font-size: clamp(35px, 8vw, 60px);
+    font-weight: 900;
+}
+
+#mathAnswer {
+    width: min(100%, 300px);
+    padding: 16px;
+    margin-bottom: 15px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    outline: none;
+    background: rgba(255,255,255,.06);
+}
+
+#mathAnswer:focus {
+    border-color: var(--accent);
+}
