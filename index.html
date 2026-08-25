@@ -2,18 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="theme-color" content="#080b18">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>City Quest</title>
+    <meta
+        name="theme-color"
+        content="#070b18"
+    >
 
-    <link rel="stylesheet" href="style.css">
+    <meta
+        name="description"
+        content="CITY QUEST — Beat challenges, earn coins, build cities, and conquer 200 levels."
+    >
+
+    <title>CITY QUEST</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="favicon.png"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <link
+        rel="manifest"
+        href="manifest.json"
+    >
 </head>
 
 <body>
 
     <div id="app">
+
+        <!-- =========================================
+             TOP BAR
+        ========================================== -->
 
         <header class="topbar">
 
@@ -24,11 +54,13 @@
             <div class="stats">
 
                 <div class="stat">
-                    🪙 <span id="coins">0</span>
+                    🪙
+                    <span id="coins">0</span>
                 </div>
 
                 <div class="stat">
-                    ⭐ LVL <span id="level">1</span>/200
+                    ⭐
+                    <span id="level">1</span>/200
                 </div>
 
             </div>
@@ -36,13 +68,21 @@
         </header>
 
 
-        <!-- HOME -->
+        <!-- =========================================
+             HOME SCREEN
+        ========================================== -->
 
-        <main id="homeScreen" class="hero">
+        <main
+            id="homeScreen"
+            class="hero"
+        >
 
             <div class="hero-content">
 
-                <div id="homeWorldBadge" class="world-badge">
+                <div
+                    id="homeWorldBadge"
+                    class="world-badge"
+                >
                     WORLD 01
                 </div>
 
@@ -51,17 +91,27 @@
                 </h1>
 
                 <p>
-                    Beat levels. Earn coins. Build your city.
+                    Beat challenges.
+                    Earn coins.
+                    Build your city.
                 </p>
 
                 <div class="buttons">
 
-                    <button id="playButton" class="primary-button">
+                    <button
+                        id="playButton"
+                        class="primary-button"
+                        type="button"
+                    >
                         PLAY ▶
                     </button>
 
-                    <button id="cityButton" class="secondary-button">
-                        MY CITIES 🏙️
+                    <button
+                        id="cityButton"
+                        class="secondary-button"
+                        type="button"
+                    >
+                        MY CITY 🏙️
                     </button>
 
                 </div>
@@ -71,87 +121,118 @@
         </main>
 
 
-        <!-- GAME -->
+        <!-- =========================================
+             GAME SCREEN
+        ========================================== -->
 
-        <section id="gameScreen" class="screen hidden">
+        <section
+            id="gameScreen"
+            class="screen hidden"
+        >
 
-            <button id="backButton" class="back-button">
+            <button
+                id="backButton"
+                class="back-button"
+                type="button"
+            >
                 ← BACK
             </button>
 
+
             <div class="game-card">
 
-                <div id="gameWorldBadge" class="world-badge">
+                <div
+                    id="gameWorldBadge"
+                    class="world-badge"
+                >
                     WORLD 01
                 </div>
 
                 <h2>
-                    LEVEL <span id="currentLevel">1</span>
+                    LEVEL
+                    <span id="currentLevel">
+                        1
+                    </span>
                 </h2>
 
                 <p id="challengeTitle">
-                    Loading challenge...
+                    Get ready...
                 </p>
 
-                <div id="rewardPreview" class="reward-preview">
+
+                <div
+                    id="rewardPreview"
+                    class="reward-preview"
+                >
                     REWARD: 0 🪙
                 </div>
 
 
-                <div id="clickChallenge"
-                    class="challenge hidden">
+                <!-- =================================
+                     UNIVERSAL CHALLENGE ENGINE
+                ================================== -->
 
-                    <p>
-                        Targets:
-                        <span id="targetProgress">
-                            0 / 10
-                        </span>
-                    </p>
+                <div
+                    id="challengeArea"
+                    class="challenge-area"
+                >
 
-                    <div id="targetArena"
-                        class="target-arena">
+                    <div
+                        id="challengeHUD"
+                        class="challenge-hud"
+                    >
 
-                        <button id="targetButton"
-                            class="target-button">
-                            🎯
-                        </button>
+                        <div>
+                            ❤️
+                            <span id="lives">
+                                3
+                            </span>
+                        </div>
+
+                        <div>
+                            🔥
+                            <span id="combo">
+                                0
+                            </span>
+                        </div>
+
+                        <div>
+                            ⏱️
+                            <span id="timer">
+                                --
+                            </span>
+                        </div>
 
                     </div>
 
-                </div>
 
-
-                <div id="reactionChallenge"
-                    class="challenge hidden">
-
-                    <p id="reactionMessage">
-                        Wait for the signal...
-                    </p>
-
-                    <button id="reactionButton"
-                        class="reaction-button">
-                        WAIT
-                    </button>
-
-                </div>
-
-
-                <div id="mathChallenge"
-                    class="challenge hidden">
-
-                    <div id="mathQuestion"
-                        class="math-question">
+                    <div
+                        id="challengeIntro"
+                        class="challenge-intro"
+                    >
+                        GET READY...
                     </div>
 
-                    <input id="mathAnswer"
-                        type="number"
-                        placeholder="Your answer"
-                        autocomplete="off">
 
-                    <button id="mathSubmitButton"
-                        class="primary-button">
-                        ANSWER
-                    </button>
+                    <div
+                        id="challengeArena"
+                        class="challenge-arena"
+                    >
+                    </div>
+
+
+                    <div
+                        id="challengeControls"
+                        class="challenge-controls"
+                    >
+                    </div>
+
+
+                    <div
+                        id="challengeMessage"
+                        class="challenge-message"
+                    >
+                    </div>
 
                 </div>
 
@@ -160,13 +241,20 @@
         </section>
 
 
-        <!-- CITY -->
+        <!-- =========================================
+             CITY SCREEN
+        ========================================== -->
 
-        <section id="cityScreen"
-            class="screen hidden">
+        <section
+            id="cityScreen"
+            class="screen hidden"
+        >
 
-            <button id="cityBackButton"
-                class="back-button">
+            <button
+                id="cityBackButton"
+                class="back-button"
+                type="button"
+            >
                 ← BACK
             </button>
 
@@ -177,8 +265,10 @@
 
                     <div>
 
-                        <div id="cityWorldBadge"
-                            class="world-badge">
+                        <div
+                            id="cityWorldBadge"
+                            class="world-badge"
+                        >
                             WORLD 01
                         </div>
 
@@ -191,7 +281,10 @@
 
                     <div class="world-switcher">
 
-                        <button id="previousWorldButton">
+                        <button
+                            id="previousWorldButton"
+                            type="button"
+                        >
                             ←
                         </button>
 
@@ -199,7 +292,10 @@
                             WORLD 1
                         </span>
 
-                        <button id="nextWorldButton">
+                        <button
+                            id="nextWorldButton"
+                            type="button"
+                        >
                             →
                         </button>
 
@@ -208,8 +304,12 @@
                 </div>
 
 
-                <div id="lockedWorldMessage"
-                    class="locked-message hidden">
+                <!-- LOCKED WORLD -->
+
+                <div
+                    id="lockedWorldMessage"
+                    class="locked-message hidden"
+                >
 
                     🔒 THIS WORLD IS LOCKED
 
@@ -220,44 +320,46 @@
                 </div>
 
 
+                <!-- CITY -->
+
                 <div id="cityContent">
 
-
-                    <div id="cityMap"
-                        class="city-map theme-neon">
-
+                    <div
+                        id="cityMap"
+                        class="city-map theme-neon"
+                    >
 
                         <div class="city-sky"></div>
 
                         <div class="city-ground"></div>
 
+                        <div
+                            class="road road-horizontal"
+                        ></div>
 
-                        <!-- ROADS -->
+                        <div
+                            class="road road-vertical"
+                        ></div>
 
-                        <div class="road road-horizontal"></div>
-
-                        <div class="road road-vertical"></div>
-
-
-                        <!-- CITY GRID -->
-
-                        <div id="cityGrid"
-                            class="city-grid">
+                        <div
+                            id="cityGrid"
+                            class="city-grid"
+                        >
                         </div>
-
 
                     </div>
 
 
                     <h3 class="build-title">
-                        BUILDINGS
+                        BUILD YOUR CITY
                     </h3>
 
 
-                    <div id="buildingShop"
-                        class="building-shop">
+                    <div
+                        id="buildingShop"
+                        class="building-shop"
+                    >
                     </div>
-
 
                 </div>
 
@@ -268,10 +370,21 @@
     </div>
 
 
-    <div id="toast"
-        class="toast">
+    <!-- =============================================
+         TOAST NOTIFICATIONS
+    ============================================== -->
+
+    <div
+        id="toast"
+        class="toast"
+        aria-live="polite"
+    >
     </div>
 
+
+    <!-- =============================================
+         SCRIPTS
+    ============================================== -->
 
     <script src="script.js"></script>
 
