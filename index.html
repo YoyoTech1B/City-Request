@@ -1,147 +1,273 @@
-.city-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    text-align: left;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080b18">
 
-.world-switcher {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+    <title>City Quest</title>
 
-.world-switcher button {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    color: white;
-    font-size: 18px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    background: rgba(255, 255, 255, .07);
-}
+    <link rel="stylesheet" href="style.css">
+</head>
 
-.world-switcher span {
-    min-width: 75px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 12px;
-    font-weight: 800;
-}
+<body>
 
-.locked-message {
-    margin-top: 35px;
-    padding: 50px 20px;
-    border: 1px dashed var(--border);
-    border-radius: 20px;
-    color: #ffcc66;
-    font-weight: 900;
-    font-size: 22px;
-}
+    <div id="app">
 
-.locked-message p {
-    margin-top: 15px;
-    color: var(--muted);
-    font-size: 14px;
-    font-weight: 400;
-}
+        <header class="topbar">
 
-.city-building {
-    min-height: 130px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-    border-radius: 18px;
-    border: 1px solid rgba(124, 92, 255, .3);
-    background:
-        linear-gradient(
-            135deg,
-            rgba(124, 92, 255, .18),
-            rgba(0, 229, 255, .08)
-        );
-}
+            <div class="logo">
+                🏙️ CITY QUEST
+            </div>
 
-.building-icon {
-    font-size: 48px;
-}
+            <div class="stats">
 
-.building-name {
-    margin-top: 8px;
-    font-weight: 800;
-    font-size: 13px;
-}
+                <div class="stat">
+                    🪙 <span id="coins">0</span>
+                </div>
 
-.building-shop {
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(150px, 1fr)
-        );
-    gap: 12px;
-}
+                <div class="stat">
+                    ⭐ LVL <span id="level">1</span>/200
+                </div>
 
-.building-button {
-    cursor: pointer;
-    min-height: 140px;
-    padding: 15px;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    border-radius: 18px;
-    border: 1px solid var(--border);
-    background: rgba(255, 255, 255, .05);
-    transition:
-        transform .2s,
-        background .2s;
-}
+            </div>
 
-.building-button:hover {
-    transform: translateY(-4px);
-    background: rgba(124, 92, 255, .15);
-}
+        </header>
 
-.shop-icon {
-    font-size: 34px;
-}
 
-.shop-name {
-    font-weight: 800;
-}
+        <!-- HOME -->
 
-.shop-price {
-    color: #ffd86b;
-    font-size: 13px;
-}
+        <main id="homeScreen" class="hero">
 
-.reward-preview {
-    margin: 25px 0;
-    padding: 15px;
-    border-radius: 14px;
-    color: #ffd86b;
-    border: 1px solid rgba(255, 216, 107, .25);
-    background: rgba(255, 216, 107, .07);
-    font-weight: 900;
-}
+            <div class="hero-content">
 
-@media (max-width: 600px) {
+                <div id="homeWorldBadge" class="world-badge">
+                    WORLD 01
+                </div>
 
-    .city-header {
-        align-items: flex-start;
-        flex-direction: column;
-    }
+                <h1 id="homeWorldName">
+                    NEON CITY
+                </h1>
 
-    .building-shop {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
+                <p>
+                    Beat levels. Earn coins. Build your city.
+                </p>
 
-}
+                <div class="buttons">
+
+                    <button id="playButton" class="primary-button">
+                        PLAY ▶
+                    </button>
+
+                    <button id="cityButton" class="secondary-button">
+                        MY CITIES 🏙️
+                    </button>
+
+                </div>
+
+            </div>
+
+        </main>
+
+
+        <!-- GAME -->
+
+        <section id="gameScreen" class="screen hidden">
+
+            <button id="backButton" class="back-button">
+                ← BACK
+            </button>
+
+            <div class="game-card">
+
+                <div id="gameWorldBadge" class="world-badge">
+                    WORLD 01
+                </div>
+
+                <h2>
+                    LEVEL <span id="currentLevel">1</span>
+                </h2>
+
+                <p id="challengeTitle">
+                    Loading challenge...
+                </p>
+
+                <div id="rewardPreview" class="reward-preview">
+                    REWARD: 0 🪙
+                </div>
+
+
+                <!-- CLICK CHALLENGE -->
+
+                <div id="clickChallenge"
+                    class="challenge hidden">
+
+                    <p>
+                        Targets:
+                        <span id="targetProgress">
+                            0 / 10
+                        </span>
+                    </p>
+
+                    <div id="targetArena"
+                        class="target-arena">
+
+                        <button id="targetButton"
+                            class="target-button">
+
+                            🎯
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- REACTION CHALLENGE -->
+
+                <div id="reactionChallenge"
+                    class="challenge hidden">
+
+                    <p id="reactionMessage">
+                        Wait for the signal...
+                    </p>
+
+                    <button id="reactionButton"
+                        class="reaction-button">
+
+                        WAIT
+
+                    </button>
+
+                </div>
+
+
+                <!-- MATH CHALLENGE -->
+
+                <div id="mathChallenge"
+                    class="challenge hidden">
+
+                    <div id="mathQuestion"
+                        class="math-question">
+
+                        1 + 1 = ?
+
+                    </div>
+
+                    <input id="mathAnswer"
+                        type="number"
+                        placeholder="Your answer"
+                        autocomplete="off">
+
+                    <button id="mathSubmitButton"
+                        class="primary-button">
+
+                        ANSWER
+
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- CITY -->
+
+        <section id="cityScreen"
+            class="screen hidden">
+
+            <button id="cityBackButton"
+                class="back-button">
+
+                ← BACK
+
+            </button>
+
+            <div class="city-card">
+
+                <div class="city-header">
+
+                    <div>
+
+                        <div id="cityWorldBadge"
+                            class="world-badge">
+
+                            WORLD 01
+
+                        </div>
+
+                        <h2 id="cityWorldName">
+
+                            NEON CITY
+
+                        </h2>
+
+                    </div>
+
+                    <div class="world-switcher">
+
+                        <button id="previousWorldButton">
+                            ←
+                        </button>
+
+                        <span id="selectedWorldNumber">
+                            WORLD 1
+                        </span>
+
+                        <button id="nextWorldButton">
+                            →
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div id="lockedWorldMessage"
+                    class="locked-message hidden">
+
+                    🔒 THIS WORLD IS LOCKED
+
+                    <p id="unlockRequirement">
+                        Complete more levels.
+                    </p>
+
+                </div>
+
+
+                <div id="cityContent">
+
+                    <div id="cityGrid"
+                        class="city-grid">
+                    </div>
+
+                    <h3>
+                        BUILDINGS
+                    </h3>
+
+                    <div id="buildingShop"
+                        class="building-shop">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <div id="toast"
+        class="toast">
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
