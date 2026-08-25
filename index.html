@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta name="theme-color" content="#080b18">
 
     <title>City Quest</title>
@@ -97,8 +98,6 @@
                 </div>
 
 
-                <!-- CLICK CHALLENGE -->
-
                 <div id="clickChallenge"
                     class="challenge hidden">
 
@@ -114,17 +113,13 @@
 
                         <button id="targetButton"
                             class="target-button">
-
                             🎯
-
                         </button>
 
                     </div>
 
                 </div>
 
-
-                <!-- REACTION CHALLENGE -->
 
                 <div id="reactionChallenge"
                     class="challenge hidden">
@@ -135,24 +130,17 @@
 
                     <button id="reactionButton"
                         class="reaction-button">
-
                         WAIT
-
                     </button>
 
                 </div>
 
-
-                <!-- MATH CHALLENGE -->
 
                 <div id="mathChallenge"
                     class="challenge hidden">
 
                     <div id="mathQuestion"
                         class="math-question">
-
-                        1 + 1 = ?
-
                     </div>
 
                     <input id="mathAnswer"
@@ -162,13 +150,10 @@
 
                     <button id="mathSubmitButton"
                         class="primary-button">
-
                         ANSWER
-
                     </button>
 
                 </div>
-
 
             </div>
 
@@ -182,10 +167,9 @@
 
             <button id="cityBackButton"
                 class="back-button">
-
                 ← BACK
-
             </button>
+
 
             <div class="city-card">
 
@@ -195,18 +179,15 @@
 
                         <div id="cityWorldBadge"
                             class="world-badge">
-
                             WORLD 01
-
                         </div>
 
                         <h2 id="cityWorldName">
-
                             NEON CITY
-
                         </h2>
 
                     </div>
+
 
                     <div class="world-switcher">
 
@@ -241,17 +222,42 @@
 
                 <div id="cityContent">
 
-                    <div id="cityGrid"
-                        class="city-grid">
+
+                    <div id="cityMap"
+                        class="city-map theme-neon">
+
+
+                        <div class="city-sky"></div>
+
+                        <div class="city-ground"></div>
+
+
+                        <!-- ROADS -->
+
+                        <div class="road road-horizontal"></div>
+
+                        <div class="road road-vertical"></div>
+
+
+                        <!-- CITY GRID -->
+
+                        <div id="cityGrid"
+                            class="city-grid">
+                        </div>
+
+
                     </div>
 
-                    <h3>
+
+                    <h3 class="build-title">
                         BUILDINGS
                     </h3>
+
 
                     <div id="buildingShop"
                         class="building-shop">
                     </div>
+
 
                 </div>
 
