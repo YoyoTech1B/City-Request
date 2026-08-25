@@ -16,65 +16,62 @@
     <div id="app">
 
         <header class="topbar">
+
             <div class="logo">
-                <span>🏙️</span>
-                CITY QUEST
+                🏙️ CITY QUEST
             </div>
 
             <div class="stats">
+
                 <div class="stat">
-                    <span>🪙</span>
-                    <span id="coins">0</span>
+                    🪙 <span id="coins">0</span>
                 </div>
 
                 <div class="stat">
-                    <span>⭐</span>
-                    <span>LVL <span id="level">1</span></span>
+                    ⭐ LVL <span id="level">1</span>/200
                 </div>
+
             </div>
+
         </header>
 
-        <main class="hero">
+
+        <!-- HOME -->
+
+        <main id="homeScreen" class="hero">
 
             <div class="hero-content">
 
-                <div class="world-badge">
+                <div id="homeWorldBadge" class="world-badge">
                     WORLD 01
                 </div>
 
-                <h1>NEON CITY</h1>
+                <h1 id="homeWorldName">
+                    NEON CITY
+                </h1>
 
-                <p>
+                <p id="homeWorldDescription">
                     Beat levels. Earn coins. Build your city.
                 </p>
 
                 <div class="buttons">
+
                     <button id="playButton" class="primary-button">
-                        PLAY
-                        <span>▶</span>
+                        PLAY ▶
                     </button>
 
                     <button id="cityButton" class="secondary-button">
-                        MY CITY
-                        <span>🏙️</span>
+                        MY CITIES 🏙️
                     </button>
+
                 </div>
 
-            </div>
-
-            <div class="city-preview">
-                <div class="skyline">
-                    <div class="building b1"></div>
-                    <div class="building b2"></div>
-                    <div class="building b3"></div>
-                    <div class="building b4"></div>
-                    <div class="building b5"></div>
-                </div>
-
-                <div class="ground"></div>
             </div>
 
         </main>
+
+
+        <!-- GAME -->
 
         <section id="gameScreen" class="screen hidden">
 
@@ -84,15 +81,21 @@
 
             <div class="game-card">
 
-                <div class="world-badge">
-                    LEVEL <span id="currentLevel">1</span>
+                <div id="gameWorldBadge" class="world-badge">
+                    WORLD 01
                 </div>
 
-                <h2>READY?</h2>
+                <h2>
+                    LEVEL <span id="currentLevel">1</span>
+                </h2>
 
-                <p>
+                <p id="levelDescription">
                     Complete the challenge to earn coins.
                 </p>
+
+                <div id="rewardPreview" class="reward-preview">
+                    REWARD: 0 🪙
+                </div>
 
                 <button id="completeButton" class="primary-button">
                     COMPLETE LEVEL ⚡
@@ -102,6 +105,9 @@
 
         </section>
 
+
+        <!-- CITY -->
+
         <section id="cityScreen" class="screen hidden">
 
             <button id="cityBackButton" class="back-button">
@@ -110,27 +116,61 @@
 
             <div class="city-card">
 
-                <div>
-                    <span class="world-badge">YOUR CITY</span>
-                    <h2>NEON CITY</h2>
+                <div class="city-header">
+
+                    <div>
+
+                        <div id="cityWorldBadge" class="world-badge">
+                            WORLD 01
+                        </div>
+
+                        <h2 id="cityWorldName">
+                            NEON CITY
+                        </h2>
+
+                    </div>
+
+                    <div class="world-switcher">
+
+                        <button id="previousWorldButton">
+                            ←
+                        </button>
+
+                        <span id="selectedWorldNumber">
+                            WORLD 1
+                        </span>
+
+                        <button id="nextWorldButton">
+                            →
+                        </button>
+
+                    </div>
+
                 </div>
 
-                <div id="cityGrid" class="city-grid">
 
-                    <div class="empty-plot">
-                        🔒
+                <div id="lockedWorldMessage" class="locked-message hidden">
+
+                    🔒 THIS WORLD IS LOCKED
+
+                    <p id="unlockRequirement">
+                        Complete more levels to unlock it.
+                    </p>
+
+                </div>
+
+
+                <div id="cityContent">
+
+                    <div id="cityGrid" class="city-grid">
                     </div>
 
-                    <div class="empty-plot">
-                        🔒
-                    </div>
 
-                    <div class="empty-plot">
-                        🔒
-                    </div>
+                    <h3>
+                        BUILDINGS
+                    </h3>
 
-                    <div class="empty-plot">
-                        🔒
+                    <div id="buildingShop" class="building-shop">
                     </div>
 
                 </div>
@@ -141,7 +181,9 @@
 
     </div>
 
+
     <div id="toast" class="toast"></div>
+
 
     <script src="script.js"></script>
 
