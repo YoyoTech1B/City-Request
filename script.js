@@ -3,19 +3,17 @@
 /* =====================================================
    CITY QUEST
    MAIN GAME ENGINE
+   MOBILE + DESKTOP
 ===================================================== */
-
 
 /* =====================================================
    GAME CONFIG
 ===================================================== */
 
 const GAME = {
-
     MAX_LEVEL: 200,
 
     WORLDS: [
-
         {
             id: 1,
             name: "NEON CITY",
@@ -23,32 +21,11 @@ const GAME = {
             end: 50,
             unlock: 1,
             multiplier: 1,
-
             buildings: [
-                {
-                    id: "neon_house",
-                    name: "Neon House",
-                    icon: "🏠",
-                    price: 500
-                },
-                {
-                    id: "cyber_shop",
-                    name: "Cyber Shop",
-                    icon: "🏪",
-                    price: 1200
-                },
-                {
-                    id: "energy_park",
-                    name: "Energy Park",
-                    icon: "🌳",
-                    price: 2000
-                },
-                {
-                    id: "mega_tower",
-                    name: "Mega Tower",
-                    icon: "🏢",
-                    price: 5000
-                }
+                { id: "neon_house", name: "Neon House", icon: "🏠", price: 500 },
+                { id: "cyber_shop", name: "Cyber Shop", icon: "🏪", price: 1200 },
+                { id: "energy_park", name: "Energy Park", icon: "🌳", price: 2000 },
+                { id: "mega_tower", name: "Mega Tower", icon: "🏢", price: 5000 }
             ]
         },
 
@@ -59,32 +36,11 @@ const GAME = {
             end: 100,
             unlock: 50,
             multiplier: 1.5,
-
             buildings: [
-                {
-                    id: "beach_house",
-                    name: "Beach House",
-                    icon: "🏖️",
-                    price: 2500
-                },
-                {
-                    id: "resort",
-                    name: "Luxury Resort",
-                    icon: "🏝️",
-                    price: 5000
-                },
-                {
-                    id: "water_park",
-                    name: "Water Park",
-                    icon: "🌊",
-                    price: 9000
-                },
-                {
-                    id: "sky_resort",
-                    name: "Sky Resort",
-                    icon: "🏨",
-                    price: 15000
-                }
+                { id: "beach_house", name: "Beach House", icon: "🏖️", price: 2500 },
+                { id: "resort", name: "Luxury Resort", icon: "🏝️", price: 5000 },
+                { id: "water_park", name: "Water Park", icon: "🌊", price: 9000 },
+                { id: "sky_resort", name: "Sky Resort", icon: "🏨", price: 15000 }
             ]
         },
 
@@ -95,32 +51,11 @@ const GAME = {
             end: 150,
             unlock: 100,
             multiplier: 2,
-
             buildings: [
-                {
-                    id: "ice_home",
-                    name: "Ice Home",
-                    icon: "🏠",
-                    price: 8000
-                },
-                {
-                    id: "winter_market",
-                    name: "Winter Market",
-                    icon: "🏪",
-                    price: 15000
-                },
-                {
-                    id: "ice_lab",
-                    name: "Ice Lab",
-                    icon: "🔬",
-                    price: 25000
-                },
-                {
-                    id: "crystal_tower",
-                    name: "Crystal Tower",
-                    icon: "🏙️",
-                    price: 40000
-                }
+                { id: "ice_home", name: "Ice Home", icon: "🏠", price: 8000 },
+                { id: "winter_market", name: "Winter Market", icon: "🏪", price: 15000 },
+                { id: "ice_lab", name: "Ice Lab", icon: "🔬", price: 25000 },
+                { id: "crystal_tower", name: "Crystal Tower", icon: "🏙️", price: 40000 }
             ]
         },
 
@@ -131,37 +66,14 @@ const GAME = {
             end: 200,
             unlock: 150,
             multiplier: 3,
-
             buildings: [
-                {
-                    id: "space_base",
-                    name: "Space Base",
-                    icon: "🛸",
-                    price: 25000
-                },
-                {
-                    id: "rocket_factory",
-                    name: "Rocket Factory",
-                    icon: "🚀",
-                    price: 50000
-                },
-                {
-                    id: "alien_market",
-                    name: "Alien Market",
-                    icon: "👽",
-                    price: 75000
-                },
-                {
-                    id: "space_station",
-                    name: "Space Station",
-                    icon: "🛰️",
-                    price: 150000
-                }
+                { id: "space_base", name: "Space Base", icon: "🛸", price: 25000 },
+                { id: "rocket_factory", name: "Rocket Factory", icon: "🚀", price: 50000 },
+                { id: "alien_market", name: "Alien Market", icon: "👽", price: 75000 },
+                { id: "space_station", name: "Space Station", icon: "🛰️", price: 150000 }
             ]
         }
-
     ]
-
 };
 
 
@@ -169,62 +81,10 @@ const GAME = {
    DEFAULT SAVE
 ===================================================== */
 
-const DEFAULT_SAVE = {
-
-    coins: 0,
-
-    level: 1,
-
-    highestLevelCompleted: 0,
-
-    cities: {
-        1: [],
-        2: [],
-        3: [],
-        4: []
-    }
-
-};
-
-
-let game = createDefaultSave();
-
-let selectedWorldId = 1;
-
-let currentChallenge = null;
-
-let challengeTimer = null;
-
-let animationFrame = null;
-
-let challengeFinished = false;
-
-let countdownTimer = null;
-
-
-/* =====================================================
-   ELEMENT HELPER
-===================================================== */
-
-function get(id) {
-
-    return document.getElementById(id);
-
-}
-
-
-/* =====================================================
-   SAVE CREATION
-===================================================== */
-
 function createDefaultSave() {
-
     return {
-
         coins: 0,
-
         level: 1,
-
         highestLevelCompleted: 0,
 
         cities: {
@@ -233,9 +93,30 @@ function createDefaultSave() {
             3: [],
             4: []
         }
-
     };
+}
 
+
+let game = createDefaultSave();
+
+let selectedWorldId = 1;
+let currentChallenge = null;
+
+let challengeTimer = null;
+let animationFrame = null;
+let countdownTimer = null;
+
+let challengeFinished = false;
+
+let toastTimeout = null;
+
+
+/* =====================================================
+   ELEMENT HELPER
+===================================================== */
+
+function get(id) {
+    return document.getElementById(id);
 }
 
 
@@ -247,31 +128,22 @@ function loadGame() {
 
     try {
 
-        const saved =
-            localStorage.getItem(
-                "CITY_QUEST_SAVE"
-            );
+        const saved = localStorage.getItem("CITY_QUEST_SAVE");
 
         if (!saved) {
-
             return;
-
         }
 
-        const parsed =
-            JSON.parse(saved);
+        const parsed = JSON.parse(saved);
 
-        if (
-            !parsed ||
-            typeof parsed !== "object"
-        ) {
-
+        if (!parsed || typeof parsed !== "object") {
             return;
-
         }
 
         game.coins =
-            Number(parsed.coins) || 0;
+            Number.isFinite(Number(parsed.coins))
+                ? Math.max(0, Number(parsed.coins))
+                : 0;
 
         game.level =
             Math.min(
@@ -283,41 +155,33 @@ function loadGame() {
             );
 
         game.highestLevelCompleted =
-            Math.max(
-                0,
-                Number(
-                    parsed.highestLevelCompleted
-                ) || 0
+            Math.min(
+                GAME.MAX_LEVEL,
+                Math.max(
+                    0,
+                    Number(parsed.highestLevelCompleted) || 0
+                )
             );
-
 
         if (
             parsed.cities &&
             typeof parsed.cities === "object"
         ) {
 
-            for (
-                const world of GAME.WORLDS
-            ) {
+            for (const world of GAME.WORLDS) {
 
                 if (
                     Array.isArray(
-                        parsed.cities[
-                            world.id
-                        ]
+                        parsed.cities[world.id]
                     )
                 ) {
 
-                    game.cities[
-                        world.id
-                    ] =
-                        parsed.cities[
-                            world.id
-                        ].filter(
-                            value =>
-                                typeof value ===
-                                "string"
-                        );
+                    game.cities[world.id] =
+                        parsed.cities[world.id]
+                            .filter(
+                                value =>
+                                    typeof value === "string"
+                            );
 
                 }
 
@@ -328,12 +192,11 @@ function loadGame() {
     } catch (error) {
 
         console.warn(
-            "Save could not be loaded.",
+            "CITY QUEST save could not be loaded.",
             error
         );
 
-        game =
-            createDefaultSave();
+        game = createDefaultSave();
 
     }
 
@@ -356,7 +219,7 @@ function saveGame() {
     } catch (error) {
 
         console.warn(
-            "Save could not be written.",
+            "CITY QUEST save could not be written.",
             error
         );
 
@@ -371,21 +234,24 @@ function saveGame() {
 
 function getWorldById(id) {
 
-    return GAME.WORLDS.find(
-        world =>
-            world.id === id
-    ) || null;
+    return (
+        GAME.WORLDS.find(
+            world => world.id === id
+        ) || null
+    );
 
 }
 
 
 function getWorldForLevel(level) {
 
-    return GAME.WORLDS.find(
-        world =>
-            level >= world.start &&
-            level <= world.end
-    ) || GAME.WORLDS[0];
+    return (
+        GAME.WORLDS.find(
+            world =>
+                level >= world.start &&
+                level <= world.end
+        ) || GAME.WORLDS[0]
+    );
 
 }
 
@@ -443,65 +309,80 @@ function getReward(level) {
             milestoneBonus +
             worldBonus +
             finalBonus
-        ) *
-        world.multiplier
+        ) * world.multiplier
     );
 
 }
 
 
 /* =====================================================
-   UI
+   SAFE UI UPDATE
+===================================================== */
+
+function setText(id, value) {
+
+    const element = get(id);
+
+    if (element) {
+        element.textContent = value;
+    }
+
+}
+
+
+/* =====================================================
+   UPDATE UI
 ===================================================== */
 
 function updateUI() {
 
     const world =
-        getWorldForLevel(
-            game.level
-        );
+        getWorldForLevel(game.level);
 
     const worldNumber =
-        String(
-            world.id
-        ).padStart(
-            2,
-            "0"
-        );
+        String(world.id).padStart(2, "0");
 
 
-    get("coins").textContent =
-        Math.floor(
-            game.coins
-        ).toLocaleString();
+    setText(
+        "coins",
+        Math.floor(game.coins).toLocaleString()
+    );
 
 
-    get("level").textContent =
-        game.level;
+    setText(
+        "level",
+        game.level
+    );
 
 
-    get("currentLevel").textContent =
-        game.level;
+    setText(
+        "currentLevel",
+        game.level
+    );
 
 
-    get("rewardPreview").textContent =
-        `REWARD: ${
-            getReward(
-                game.level
-            ).toLocaleString()
-        } 🪙`;
+    setText(
+        "rewardPreview",
+        `REWARD: ${getReward(game.level).toLocaleString()} 🪙`
+    );
 
 
-    get("homeWorldBadge").textContent =
-        `WORLD ${worldNumber}`;
+    setText(
+        "homeWorldBadge",
+        `WORLD ${worldNumber}`
+    );
 
 
-    get("homeWorldName").textContent =
-        world.name;
+    setText(
+        "homeWorldName",
+        world.name
+    );
 
 
-    get("gameWorldBadge").textContent =
-        `WORLD ${worldNumber} — ${world.name}`;
+    setText(
+        "gameWorldBadge",
+        `WORLD ${worldNumber} — ${world.name}`
+    );
 
 }
 
@@ -512,18 +393,27 @@ function updateUI() {
 
 function showScreen(screen) {
 
-    get("homeScreen")
-        .classList.add("hidden");
+    if (!screen) {
+        return;
+    }
 
-    get("gameScreen")
-        .classList.add("hidden");
+    const screens = [
+        get("homeScreen"),
+        get("gameScreen"),
+        get("cityScreen")
+    ];
 
-    get("cityScreen")
-        .classList.add("hidden");
+    screens.forEach(
+        item => {
 
+            if (item) {
+                item.classList.add("hidden");
+            }
 
-    screen
-        .classList.remove("hidden");
+        }
+    );
+
+    screen.classList.remove("hidden");
 
 }
 
@@ -534,61 +424,44 @@ function showScreen(screen) {
 
 function stopChallenge() {
 
-    if (
-        challengeTimer !== null
-    ) {
+    if (challengeTimer !== null) {
 
-        clearInterval(
-            challengeTimer
-        );
+        clearInterval(challengeTimer);
+        clearTimeout(challengeTimer);
 
-        clearTimeout(
-            challengeTimer
-        );
-
-        challengeTimer =
-            null;
+        challengeTimer = null;
 
     }
 
 
-    if (
-        countdownTimer !== null
-    ) {
+    if (countdownTimer !== null) {
 
-        clearInterval(
-            countdownTimer
-        );
+        clearInterval(countdownTimer);
+        clearTimeout(countdownTimer);
 
-        clearTimeout(
-            countdownTimer
-        );
-
-        countdownTimer =
-            null;
+        countdownTimer = null;
 
     }
 
 
-    if (
-        animationFrame !== null
-    ) {
+    if (animationFrame !== null) {
 
-        cancelAnimationFrame(
-            animationFrame
-        );
+        cancelAnimationFrame(animationFrame);
 
-        animationFrame =
-            null;
+        animationFrame = null;
 
     }
 
 
-    document.onkeydown =
-        null;
+    document.onkeydown = null;
+    document.onkeyup = null;
 
-    document.onkeyup =
-        null;
+
+    const arena = get("challengeArena");
+
+    if (arena) {
+        arena.style.touchAction = "";
+    }
 
 }
 
@@ -609,21 +482,13 @@ function createChallenge(level) {
 
 
     const types = [
-
         "target",
-
         "bomb",
-
         "reaction",
-
         "dodge",
-
         "safe",
-
         "sequence",
-
         "survival"
-
     ];
 
 
@@ -641,11 +506,8 @@ function createChallenge(level) {
     return {
 
         level,
-
         difficulty,
-
         type,
-
         variation,
 
         lives:
@@ -695,7 +557,6 @@ function createChallenge(level) {
         enemies:
             2 +
             difficulty
-
     };
 
 }
@@ -709,34 +570,18 @@ function getChallengeName(challenge) {
 
     const names = {
 
-        target:
-            "🎯 TARGET RUSH",
-
-        bomb:
-            "💣 BOMB DEFUSER",
-
-        reaction:
-            "⚡ LIGHTNING REACTION",
-
-        dodge:
-            "👾 DANGER ZONE",
-
-        safe:
-            "🟢 FIND THE SAFE ONE",
-
-        sequence:
-            "🔢 CODE BREAKER",
-
-        survival:
-            "🔥 SURVIVAL STORM"
+        target: "🎯 TARGET RUSH",
+        bomb: "💣 BOMB DEFUSER",
+        reaction: "⚡ LIGHTNING REACTION",
+        dodge: "👾 DANGER ZONE",
+        safe: "🟢 FIND THE SAFE ONE",
+        sequence: "🔢 CODE BREAKER",
+        survival: "🔥 SURVIVAL STORM"
 
     };
 
-
     return (
-        names[
-            challenge.type
-        ] ||
+        names[challenge.type] ||
         "⚡ CHALLENGE"
     );
 
@@ -752,54 +597,61 @@ function startLevel() {
     stopChallenge();
 
     currentChallenge =
-        createChallenge(
-            game.level
-        );
+        createChallenge(game.level);
 
-    challengeFinished =
-        false;
+    challengeFinished = false;
 
 
-    get("challengeArena")
-        .innerHTML = "";
+    const arena = get("challengeArena");
+    const controls = get("challengeControls");
+
+    if (arena) {
+        arena.innerHTML = "";
+    }
+
+    if (controls) {
+        controls.innerHTML = "";
+    }
 
 
-    get("challengeControls")
-        .innerHTML = "";
+    setText(
+        "challengeMessage",
+        ""
+    );
 
 
-    get("challengeMessage")
-        .textContent = "";
-
-
-    get("challengeTitle")
-        .textContent =
+    setText(
+        "challengeTitle",
         getChallengeName(
             currentChallenge
-        );
+        )
+    );
 
 
-    get("lives")
-        .textContent =
-        currentChallenge.lives;
+    setText(
+        "lives",
+        currentChallenge.lives
+    );
 
 
-    get("combo")
-        .textContent =
-        "0";
+    setText(
+        "combo",
+        "0"
+    );
 
 
-    get("timer")
-        .textContent =
-        currentChallenge.time;
+    setText(
+        "timer",
+        currentChallenge.time
+    );
 
 
     let count = 3;
 
-
-    get("challengeIntro")
-        .textContent =
-        count;
+    setText(
+        "challengeIntro",
+        count
+    );
 
 
     countdownTimer =
@@ -808,15 +660,12 @@ function startLevel() {
 
                 count--;
 
+                if (count > 0) {
 
-                if (
-                    count > 0
-                ) {
-
-                    get(
-                        "challengeIntro"
-                    ).textContent =
-                        count;
+                    setText(
+                        "challengeIntro",
+                        count
+                    );
 
                 } else {
 
@@ -824,14 +673,13 @@ function startLevel() {
                         countdownTimer
                     );
 
-                    countdownTimer =
-                        null;
+                    countdownTimer = null;
 
 
-                    get(
-                        "challengeIntro"
-                    ).textContent =
-                        "GO!";
+                    setText(
+                        "challengeIntro",
+                        "GO!"
+                    );
 
 
                     launchChallenge(
@@ -853,70 +701,38 @@ function startLevel() {
 
 function launchChallenge(challenge) {
 
-    switch (
-        challenge.type
-    ) {
+    switch (challenge.type) {
 
         case "target":
-
-            launchTarget(
-                challenge
-            );
-
+            launchTarget(challenge);
             break;
-
 
         case "bomb":
-
-            launchBombDefuser(
-                challenge
-            );
-
+            launchBombDefuser(challenge);
             break;
-
 
         case "reaction":
-
-            launchReaction(
-                challenge
-            );
-
+            launchReaction(challenge);
             break;
-
 
         case "dodge":
-
-            launchDodge(
-                challenge
-            );
-
+            launchDodge(challenge);
             break;
-
 
         case "safe":
-
-            launchSafe(
-                challenge
-            );
-
+            launchSafe(challenge);
             break;
-
 
         case "sequence":
-
-            launchSequence(
-                challenge
-            );
-
+            launchSequence(challenge);
             break;
 
-
         case "survival":
+            launchSurvival(challenge);
+            break;
 
-            launchSurvival(
-                challenge
-            );
-
+        default:
+            failLevel();
             break;
 
     }
@@ -934,37 +750,21 @@ function launchTarget(challenge) {
 
 
     const target =
-        document.createElement(
-            "button"
-        );
+        document.createElement("button");
 
 
-    target.className =
-        "challenge-target";
+    target.type = "button";
+    target.className = "challenge-target";
+    target.textContent = "🎯";
 
 
-    target.type =
-        "button";
-
-
-    target.textContent =
-        "🎯";
-
-
-    get("challengeArena")
-        .appendChild(
-            target
-        );
+    get("challengeArena").appendChild(target);
 
 
     function move() {
 
-        if (
-            challengeFinished
-        ) {
-
+        if (challengeFinished) {
             return;
-
         }
 
 
@@ -989,39 +789,31 @@ function launchTarget(challenge) {
 
 
         target.style.left =
-            `${
-                Math.random() *
-                maxX
-            }px`;
+            `${Math.random() * maxX}px`;
 
 
         target.style.top =
-            `${
-                Math.random() *
-                maxY
-            }px`;
+            `${Math.random() * maxY}px`;
 
     }
 
 
-    target.onclick =
+    target.addEventListener(
+        "click",
         () => {
 
-            if (
-                challengeFinished
-            ) {
-
+            if (challengeFinished) {
                 return;
-
             }
 
 
             hits++;
 
 
-            get("combo")
-                .textContent =
-                hits;
+            setText(
+                "combo",
+                hits
+            );
 
 
             if (
@@ -1029,10 +821,7 @@ function launchTarget(challenge) {
                 challenge.targets
             ) {
 
-                winLevel(
-                    hits
-                );
-
+                winLevel(hits);
                 return;
 
             }
@@ -1040,11 +829,11 @@ function launchTarget(challenge) {
 
             move();
 
-        };
+        }
+    );
 
 
     move();
-
 
     startTimer(
         challenge.time
@@ -1063,182 +852,73 @@ function launchBombDefuser(challenge) {
         get("challengeArena");
 
 
-    arena.innerHTML =
-        "";
-
-
-    arena.style.display =
-        "block";
-
-
-    arena.style.padding =
-        "20px";
+    arena.innerHTML = "";
+    arena.style.display = "block";
+    arena.style.padding = "20px";
 
 
     let round = 0;
+    let currentBomb = null;
 
-
-    let currentBomb =
-        null;
-
-
-    let roundTimeout =
-        null;
-
-
-    let roundInterval =
-        null;
+    let roundTimeout = null;
+    let roundInterval = null;
 
 
     const title =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
+    title.textContent = "💣";
+    title.style.textAlign = "center";
+    title.style.fontSize = "55px";
+    title.style.marginTop = "20px";
 
-    title.style.textAlign =
-        "center";
-
-
-    title.style.fontSize =
-        "55px";
-
-
-    title.style.marginTop =
-        "20px";
-
-
-    title.textContent =
-        "💣";
-
-
-    arena.appendChild(
-        title
-    );
+    arena.appendChild(title);
 
 
     const instruction =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
+    instruction.style.textAlign = "center";
+    instruction.style.fontSize = "20px";
+    instruction.style.fontWeight = "1000";
+    instruction.style.margin = "15px";
 
-    instruction.style.textAlign =
-        "center";
-
-
-    instruction.style.fontSize =
-        "20px";
-
-
-    instruction.style.fontWeight =
-        "1000";
-
-
-    instruction.style.margin =
-        "15px";
-
-
-    arena.appendChild(
-        instruction
-    );
+    arena.appendChild(instruction);
 
 
     const wires =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
-
-    wires.style.display =
-        "grid";
-
-
+    wires.style.display = "grid";
     wires.style.gridTemplateColumns =
         "repeat(2, minmax(100px, 1fr))";
+    wires.style.gap = "15px";
+    wires.style.maxWidth = "500px";
+    wires.style.margin = "25px auto";
 
-
-    wires.style.gap =
-        "15px";
-
-
-    wires.style.maxWidth =
-        "500px";
-
-
-    wires.style.margin =
-        "25px auto";
-
-
-    arena.appendChild(
-        wires
-    );
+    arena.appendChild(wires);
 
 
     const colors = [
-
-        {
-            name: "RED",
-            emoji: "🔴"
-        },
-
-        {
-            name: "BLUE",
-            emoji: "🔵"
-        },
-
-        {
-            name: "GREEN",
-            emoji: "🟢"
-        },
-
-        {
-            name: "YELLOW",
-            emoji: "🟡"
-        },
-
-        {
-            name: "PURPLE",
-            emoji: "🟣"
-        },
-
-        {
-            name: "ORANGE",
-            emoji: "🟠"
-        }
-
+        { name: "RED", emoji: "🔴" },
+        { name: "BLUE", emoji: "🔵" },
+        { name: "GREEN", emoji: "🟢" },
+        { name: "YELLOW", emoji: "🟡" },
+        { name: "PURPLE", emoji: "🟣" },
+        { name: "ORANGE", emoji: "🟠" }
     ];
 
 
     function clearRoundTimers() {
 
-        if (
-            roundTimeout !==
-            null
-        ) {
-
-            clearTimeout(
-                roundTimeout
-            );
-
-            roundTimeout =
-                null;
-
+        if (roundTimeout !== null) {
+            clearTimeout(roundTimeout);
+            roundTimeout = null;
         }
 
-
-        if (
-            roundInterval !==
-            null
-        ) {
-
-            clearInterval(
-                roundInterval
-            );
-
-            roundInterval =
-                null;
-
+        if (roundInterval !== null) {
+            clearInterval(roundInterval);
+            roundInterval = null;
         }
 
     }
@@ -1246,20 +926,14 @@ function launchBombDefuser(challenge) {
 
     function startRound() {
 
-        if (
-            challengeFinished
-        ) {
-
+        if (challengeFinished) {
             return;
-
         }
 
 
         clearRoundTimers();
 
-
-        wires.innerHTML =
-            "";
+        wires.innerHTML = "";
 
 
         const wireCount =
@@ -1275,13 +949,9 @@ function launchBombDefuser(challenge) {
         const shuffled =
             [...colors]
                 .sort(
-                    () =>
-                        Math.random() - 0.5
+                    () => Math.random() - 0.5
                 )
-                .slice(
-                    0,
-                    wireCount
-                );
+                .slice(0, wireCount);
 
 
         const correct =
@@ -1293,18 +963,13 @@ function launchBombDefuser(challenge) {
             ];
 
 
-        currentBomb =
-            correct;
+        currentBomb = correct;
 
 
         const instructions = [
-
             `CUT THE ${correct.name} WIRE!`,
-
             `DISARM USING ${correct.name}!`,
-
             `FIND ${correct.name}!`
-
         ];
 
 
@@ -1321,40 +986,24 @@ function launchBombDefuser(challenge) {
             color => {
 
                 const button =
-                    document.createElement(
-                        "button"
-                    );
+                    document.createElement("button");
 
 
-                button.type =
-                    "button";
-
-
-                button.className =
-                    "challenge-action";
-
-
-                button.style.minHeight =
-                    "75px";
-
-
-                button.style.fontSize =
-                    "18px";
-
+                button.type = "button";
+                button.className = "challenge-action";
+                button.style.minHeight = "75px";
+                button.style.fontSize = "18px";
 
                 button.textContent =
                     `${color.emoji} ${color.name}`;
 
 
-                button.onclick =
+                button.addEventListener(
+                    "click",
                     () => {
 
-                        if (
-                            challengeFinished
-                        ) {
-
+                        if (challengeFinished) {
                             return;
-
                         }
 
 
@@ -1368,10 +1017,10 @@ function launchBombDefuser(challenge) {
 
                             round++;
 
-
-                            get("combo")
-                                .textContent =
-                                round;
+                            setText(
+                                "combo",
+                                round
+                            );
 
 
                             if (
@@ -1379,10 +1028,7 @@ function launchBombDefuser(challenge) {
                                 challenge.rounds
                             ) {
 
-                                winLevel(
-                                    round
-                                );
-
+                                winLevel(round);
                                 return;
 
                             }
@@ -1415,12 +1061,11 @@ function launchBombDefuser(challenge) {
 
                         }
 
-                    };
-
-
-                wires.appendChild(
-                    button
+                    }
                 );
+
+
+                wires.appendChild(button);
 
             }
         );
@@ -1430,60 +1075,48 @@ function launchBombDefuser(challenge) {
             Math.max(
                 1200,
                 4500 -
-                challenge.difficulty *
-                300
+                challenge.difficulty * 300
             );
 
 
-        let remaining =
-            roundTime;
+        let remaining = roundTime;
 
 
-        get("timer")
-            .textContent =
-            (
-                remaining / 1000
-            ).toFixed(1);
+        setText(
+            "timer",
+            (remaining / 1000).toFixed(1)
+        );
 
 
         roundInterval =
             setInterval(
                 () => {
 
-                    if (
-                        challengeFinished
-                    ) {
-
+                    if (challengeFinished) {
                         clearRoundTimers();
-
                         return;
-
                     }
 
 
-                    remaining -=
-                        100;
+                    remaining -= 100;
 
 
-                    get("timer")
-                        .textContent =
+                    setText(
+                        "timer",
                         Math.max(
                             0,
                             remaining / 1000
-                        ).toFixed(1);
+                        ).toFixed(1)
+                    );
 
 
-                    if (
-                        remaining <= 0
-                    ) {
+                    if (remaining <= 0) {
 
                         clearRoundTimers();
-
 
                         showToast(
                             "💥 TOO SLOW!"
                         );
-
 
                         loseLife();
 
@@ -1506,9 +1139,7 @@ function launchBombDefuser(challenge) {
         roundTimeout =
             setTimeout(
                 () => {
-
                     clearRoundTimers();
-
                 },
                 roundTime
             );
@@ -1528,74 +1159,50 @@ function launchBombDefuser(challenge) {
 function launchReaction(challenge) {
 
     let round = 0;
-
     let ready = false;
-
     let waiting = false;
 
     let signalTimeout = null;
-
     let reactionTimeout = null;
 
 
     const button =
-        document.createElement(
-            "button"
-        );
+        document.createElement("button");
 
 
-    button.type =
-        "button";
-
-
-    button.className =
-        "challenge-action";
-
-
-    button.textContent =
-        "WAIT...";
+    button.type = "button";
+    button.className = "challenge-action";
+    button.textContent = "WAIT...";
 
 
     get("challengeControls")
-        .appendChild(
-            button
-        );
+        .appendChild(button);
 
 
     function nextRound() {
 
         ready = false;
-
         waiting = true;
 
-
-        button.textContent =
-            "WAIT...";
+        button.textContent = "WAIT...";
 
 
         const delay =
             600 +
-            Math.random() *
-            1400;
+            Math.random() * 1400;
 
 
         signalTimeout =
             setTimeout(
                 () => {
 
-                    if (
-                        challengeFinished
-                    ) {
-
+                    if (challengeFinished) {
                         return;
-
                     }
 
 
                     ready = true;
-
                     waiting = false;
-
 
                     button.textContent =
                         "⚡ CLICK!";
@@ -1605,13 +1212,9 @@ function launchReaction(challenge) {
                         setTimeout(
                             () => {
 
-                                if (
-                                    ready
-                                ) {
+                                if (ready) {
 
-                                    ready =
-                                        false;
-
+                                    ready = false;
                                     loseLife();
 
                                 }
@@ -1627,15 +1230,12 @@ function launchReaction(challenge) {
     }
 
 
-    button.onclick =
+    button.addEventListener(
+        "click",
         () => {
 
-            if (
-                challengeFinished
-            ) {
-
+            if (challengeFinished) {
                 return;
-
             }
 
 
@@ -1645,7 +1245,6 @@ function launchReaction(challenge) {
             ) {
 
                 loseLife();
-
                 return;
 
             }
@@ -1655,7 +1254,6 @@ function launchReaction(challenge) {
                 reactionTimeout
             );
 
-
             clearTimeout(
                 signalTimeout
             );
@@ -1663,13 +1261,13 @@ function launchReaction(challenge) {
 
             ready = false;
 
-
             round++;
 
 
-            get("combo")
-                .textContent =
-                round;
+            setText(
+                "combo",
+                round
+            );
 
 
             if (
@@ -1677,10 +1275,7 @@ function launchReaction(challenge) {
                 challenge.reactions
             ) {
 
-                winLevel(
-                    round
-                );
-
+                winLevel(round);
                 return;
 
             }
@@ -1688,7 +1283,8 @@ function launchReaction(challenge) {
 
             nextRound();
 
-        };
+        }
+    );
 
 
     nextRound();
@@ -1698,6 +1294,7 @@ function launchReaction(challenge) {
 
 /* =====================================================
    DANGER ZONE
+   DESKTOP + MOBILE TOUCH
 ===================================================== */
 
 function launchDodge(challenge) {
@@ -1706,40 +1303,74 @@ function launchDodge(challenge) {
         get("challengeArena");
 
 
+    arena.innerHTML = "";
+
+
+    /*
+       IMPORTANT:
+       Allow touch gestures inside the game.
+    */
+
+    arena.style.touchAction = "none";
+
+
     const player =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
 
     player.className =
         "dodge-player";
 
 
-    arena.appendChild(
-        player
-    );
+    arena.appendChild(player);
 
 
     let x =
-        arena.clientWidth / 2 -
-        21;
+        Math.max(
+            0,
+            arena.clientWidth / 2 - 21
+        );
 
 
     let y =
-        arena.clientHeight / 2 -
-        21;
+        Math.max(
+            0,
+            arena.clientHeight / 2 - 21
+        );
 
 
     const keys = {};
 
 
+    /* =================================================
+       KEYBOARD CONTROLS
+    ================================================= */
+
     document.onkeydown =
         event => {
 
-            keys[
-                event.key.toLowerCase()
-            ] = true;
+            const key =
+                event.key.toLowerCase();
+
+
+            if (
+                [
+                    "w",
+                    "a",
+                    "s",
+                    "d",
+                    "arrowup",
+                    "arrowdown",
+                    "arrowleft",
+                    "arrowright"
+                ].includes(key)
+            ) {
+
+                event.preventDefault();
+
+                keys[key] = true;
+
+            }
 
         };
 
@@ -1747,12 +1378,158 @@ function launchDodge(challenge) {
     document.onkeyup =
         event => {
 
-            keys[
-                event.key.toLowerCase()
-            ] = false;
+            const key =
+                event.key.toLowerCase();
+
+
+            keys[key] = false;
 
         };
 
+
+    /* =================================================
+       MOBILE TOUCH CONTROL
+    ================================================= */
+
+    let touchActive = false;
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    let touchCurrentX = 0;
+    let touchCurrentY = 0;
+
+
+    function getTouchPosition(event) {
+
+        if (
+            !event.touches ||
+            event.touches.length === 0
+        ) {
+
+            return null;
+
+        }
+
+
+        const touch =
+            event.touches[0];
+
+
+        const rect =
+            arena.getBoundingClientRect();
+
+
+        return {
+
+            x:
+                touch.clientX -
+                rect.left,
+
+            y:
+                touch.clientY -
+                rect.top
+
+        };
+
+    }
+
+
+    arena.addEventListener(
+        "touchstart",
+        event => {
+
+            if (challengeFinished) {
+                return;
+            }
+
+
+            const position =
+                getTouchPosition(event);
+
+
+            if (!position) {
+                return;
+            }
+
+
+            event.preventDefault();
+
+
+            touchActive = true;
+
+
+            touchStartX =
+                position.x;
+
+            touchStartY =
+                position.y;
+
+
+            touchCurrentX =
+                position.x;
+
+            touchCurrentY =
+                position.y;
+
+        },
+        { passive: false }
+    );
+
+
+    arena.addEventListener(
+        "touchmove",
+        event => {
+
+            if (
+                !touchActive ||
+                challengeFinished
+            ) {
+
+                return;
+
+            }
+
+
+            const position =
+                getTouchPosition(event);
+
+
+            if (!position) {
+                return;
+            }
+
+
+            event.preventDefault();
+
+
+            touchCurrentX =
+                position.x;
+
+            touchCurrentY =
+                position.y;
+
+        },
+        { passive: false }
+    );
+
+
+    arena.addEventListener(
+        "touchend",
+        event => {
+
+            event.preventDefault();
+
+            touchActive = false;
+
+        },
+        { passive: false }
+    );
+
+
+    /* =================================================
+       ENEMIES
+    ================================================= */
 
     const enemies = [];
 
@@ -1764,9 +1541,7 @@ function launchDodge(challenge) {
     ) {
 
         const enemy =
-            document.createElement(
-                "div"
-            );
+            document.createElement("div");
 
 
         enemy.className =
@@ -1777,8 +1552,7 @@ function launchDodge(challenge) {
             Math.random() *
             Math.max(
                 1,
-                arena.clientWidth -
-                30
+                arena.clientWidth - 30
             );
 
 
@@ -1786,43 +1560,33 @@ function launchDodge(challenge) {
             Math.random() *
             Math.max(
                 1,
-                arena.clientHeight -
-                30
+                arena.clientHeight - 30
             );
 
 
         enemy.vx =
             (
-                Math.random() -
-                0.5
+                Math.random() - 0.5
             ) *
             (
                 1.5 +
-                challenge.difficulty *
-                0.3
+                challenge.difficulty * 0.3
             );
 
 
         enemy.vy =
             (
-                Math.random() -
-                0.5
+                Math.random() - 0.5
             ) *
             (
                 1.5 +
-                challenge.difficulty *
-                0.3
+                challenge.difficulty * 0.3
             );
 
 
-        arena.appendChild(
-            enemy
-        );
+        arena.appendChild(enemy);
 
-
-        enemies.push(
-            enemy
-        );
+        enemies.push(enemy);
 
     }
 
@@ -1833,20 +1597,13 @@ function launchDodge(challenge) {
 
     function loop(now) {
 
-        if (
-            challengeFinished
-        ) {
-
+        if (challengeFinished) {
             return;
-
         }
 
 
         const elapsed =
-            (
-                now -
-                start
-            ) / 1000;
+            (now - start) / 1000;
 
 
         if (
@@ -1855,7 +1612,6 @@ function launchDodge(challenge) {
         ) {
 
             winLevel();
-
             return;
 
         }
@@ -1863,17 +1619,18 @@ function launchDodge(challenge) {
 
         const speed =
             3.5 +
-            challenge.difficulty *
-            0.3;
+            challenge.difficulty * 0.3;
 
+
+        /* =============================================
+           DESKTOP KEYBOARD
+        ============================================= */
 
         if (
             keys.w ||
             keys.arrowup
         ) {
-
             y -= speed;
-
         }
 
 
@@ -1881,9 +1638,7 @@ function launchDodge(challenge) {
             keys.s ||
             keys.arrowdown
         ) {
-
             y += speed;
-
         }
 
 
@@ -1891,9 +1646,7 @@ function launchDodge(challenge) {
             keys.a ||
             keys.arrowleft
         ) {
-
             x -= speed;
-
         }
 
 
@@ -1901,18 +1654,72 @@ function launchDodge(challenge) {
             keys.d ||
             keys.arrowright
         ) {
-
             x += speed;
+        }
+
+
+        /* =============================================
+           MOBILE SWIPE / DRAG
+        ============================================= */
+
+        if (touchActive) {
+
+            const dx =
+                touchCurrentX -
+                touchStartX;
+
+            const dy =
+                touchCurrentY -
+                touchStartY;
+
+
+            const distance =
+                Math.sqrt(
+                    dx * dx +
+                    dy * dy
+                );
+
+
+            if (distance > 8) {
+
+                const normalizedX =
+                    dx / distance;
+
+                const normalizedY =
+                    dy / distance;
+
+
+                const mobileSpeed =
+                    4 +
+                    challenge.difficulty * 0.35;
+
+
+                x +=
+                    normalizedX *
+                    mobileSpeed;
+
+
+                y +=
+                    normalizedY *
+                    mobileSpeed;
+
+            }
 
         }
 
+
+        /* =============================================
+           KEEP PLAYER INSIDE ARENA
+        ============================================= */
 
         x =
             Math.max(
                 0,
                 Math.min(
-                    arena.clientWidth -
-                    42,
+                    Math.max(
+                        0,
+                        arena.clientWidth - 42
+                    ),
                     x
                 )
             );
@@ -1922,8 +1729,10 @@ function launchDodge(challenge) {
             Math.max(
                 0,
                 Math.min(
-                    arena.clientHeight -
-                    42,
+                    Math.max(
+                        0,
+                        arena.clientHeight - 42
+                    ),
                     y
                 )
             );
@@ -1937,23 +1746,20 @@ function launchDodge(challenge) {
             `${y}px`;
 
 
-        for (
-            const enemy of enemies
-        ) {
+        /* =============================================
+           ENEMY MOVEMENT
+        ============================================= */
 
-            enemy.x +=
-                enemy.vx;
+        for (const enemy of enemies) {
 
-
-            enemy.y +=
-                enemy.vy;
+            enemy.x += enemy.vx;
+            enemy.y += enemy.vy;
 
 
             if (
                 enemy.x <= 0 ||
                 enemy.x >=
-                arena.clientWidth -
-                30
+                arena.clientWidth - 30
             ) {
 
                 enemy.vx *= -1;
@@ -1964,8 +1770,7 @@ function launchDodge(challenge) {
             if (
                 enemy.y <= 0 ||
                 enemy.y >=
-                arena.clientHeight -
-                30
+                arena.clientHeight - 30
             ) {
 
                 enemy.vy *= -1;
@@ -1995,8 +1800,7 @@ function launchDodge(challenge) {
                     Math.random() *
                     Math.max(
                         1,
-                        arena.clientWidth -
-                        30
+                        arena.clientWidth - 30
                     );
 
 
@@ -2004,8 +1808,7 @@ function launchDodge(challenge) {
                     Math.random() *
                     Math.max(
                         1,
-                        arena.clientHeight -
-                        30
+                        arena.clientHeight - 30
                     );
 
             }
@@ -2013,29 +1816,26 @@ function launchDodge(challenge) {
         }
 
 
-        get("timer")
-            .textContent =
+        setText(
+            "timer",
             Math.max(
                 0,
                 Math.ceil(
                     challenge.time -
                     elapsed
                 )
-            );
+            )
+        );
 
 
         animationFrame =
-            requestAnimationFrame(
-                loop
-            );
+            requestAnimationFrame(loop);
 
     }
 
 
     animationFrame =
-        requestAnimationFrame(
-            loop
-        );
+        requestAnimationFrame(loop);
 
 }
 
@@ -2051,12 +1851,8 @@ function launchSafe(challenge) {
 
     function spawn() {
 
-        if (
-            challengeFinished
-        ) {
-
+        if (challengeFinished) {
             return;
-
         }
 
 
@@ -2064,8 +1860,7 @@ function launchSafe(challenge) {
             get("challengeArena");
 
 
-        arena.innerHTML =
-            "";
+        arena.innerHTML = "";
 
 
         const count =
@@ -2078,8 +1873,7 @@ function launchSafe(challenge) {
 
         const safe =
             Math.floor(
-                Math.random() *
-                count
+                Math.random() * count
             );
 
 
@@ -2090,13 +1884,10 @@ function launchSafe(challenge) {
         ) {
 
             const button =
-                document.createElement(
-                    "button"
-                );
+                document.createElement("button");
 
 
-            button.type =
-                "button";
+            button.type = "button";
 
 
             button.className =
@@ -2112,24 +1903,20 @@ function launchSafe(challenge) {
 
 
             button.style.left =
-                `${10 +
-                    Math.random() * 75}%`;
+                `${10 + Math.random() * 75}%`;
 
 
             button.style.top =
-                `${10 +
-                    Math.random() * 70}%`;
+                `${10 + Math.random() * 70}%`;
 
 
-            button.onclick =
+            button.addEventListener(
+                "click",
                 () => {
 
-                    if (
-                        i !== safe
-                    ) {
+                    if (i !== safe) {
 
                         loseLife();
-
                         return;
 
                     }
@@ -2138,9 +1925,10 @@ function launchSafe(challenge) {
                     round++;
 
 
-                    get("combo")
-                        .textContent =
-                        round;
+                    setText(
+                        "combo",
+                        round
+                    );
 
 
                     if (
@@ -2148,9 +1936,7 @@ function launchSafe(challenge) {
                         challenge.rounds
                     ) {
 
-                        winLevel(
-                            round
-                        );
+                        winLevel(round);
 
                     } else {
 
@@ -2158,12 +1944,11 @@ function launchSafe(challenge) {
 
                     }
 
-                };
-
-
-            arena.appendChild(
-                button
+                }
             );
+
+
+            arena.appendChild(button);
 
         }
 
@@ -2186,46 +1971,29 @@ function launchSequence(challenge) {
 
 
     const display =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
 
     display.className =
         "number-display";
 
 
-    arena.appendChild(
-        display
-    );
+    arena.appendChild(display);
 
 
     const input =
-        document.createElement(
-            "input"
-        );
+        document.createElement("input");
 
 
-    input.type =
-        "text";
-
-
-    input.inputMode =
-        "numeric";
-
-
-    input.placeholder =
-        "ENTER THE CODE";
-
-
-    input.className =
-        "challenge-action";
+    input.type = "text";
+    input.inputMode = "numeric";
+    input.autocomplete = "off";
+    input.placeholder = "ENTER THE CODE";
+    input.className = "challenge-action";
 
 
     get("challengeControls")
-        .appendChild(
-            input
-        );
+        .appendChild(input);
 
 
     const sequence = [];
@@ -2251,12 +2019,8 @@ function launchSequence(challenge) {
 
     function showNext() {
 
-        if (
-            challengeFinished
-        ) {
-
+        if (challengeFinished) {
             return;
-
         }
 
 
@@ -2267,9 +2031,12 @@ function launchSequence(challenge) {
         setTimeout(
             () => {
 
-                display.textContent =
-                    "•";
+                if (challengeFinished) {
+                    return;
+                }
 
+
+                display.textContent = "•";
 
                 index++;
 
@@ -2294,24 +2061,22 @@ function launchSequence(challenge) {
             Math.max(
                 300,
                 750 -
-                challenge.difficulty *
-                35
+                challenge.difficulty * 35
             )
         );
 
     }
 
 
-    input.onkeydown =
+    input.addEventListener(
+        "keydown",
         event => {
 
             if (
                 event.key !==
                 "Enter"
             ) {
-
                 return;
-
             }
 
 
@@ -2326,14 +2091,14 @@ function launchSequence(challenge) {
 
             } else {
 
-                input.value =
-                    "";
+                input.value = "";
 
                 loseLife();
 
             }
 
-        };
+        }
+    );
 
 
     setTimeout(
@@ -2353,98 +2118,77 @@ function launchSurvival(challenge) {
     let remaining =
         challenge.time;
 
-
     let score = 0;
 
 
     const button =
-        document.createElement(
-            "button"
-        );
+        document.createElement("button");
 
 
-    button.type =
-        "button";
-
-
-    button.className =
-        "challenge-action";
-
-
-    button.textContent =
-        "⚡ TAP FOR POWER";
+    button.type = "button";
+    button.className = "challenge-action";
+    button.textContent = "⚡ TAP FOR POWER";
 
 
     get("challengeControls")
-        .appendChild(
-            button
-        );
+        .appendChild(button);
 
 
-    button.onclick =
+    button.addEventListener(
+        "click",
         () => {
 
-            if (
-                challengeFinished
-            ) {
-
+            if (challengeFinished) {
                 return;
-
             }
 
 
             score++;
 
 
-            get("combo")
-                .textContent =
-                score;
+            setText(
+                "combo",
+                score
+            );
 
-        };
+        }
+    );
 
 
-    get("timer")
-        .textContent =
-        remaining;
+    setText(
+        "timer",
+        remaining
+    );
 
 
     challengeTimer =
         setInterval(
             () => {
 
-                if (
-                    challengeFinished
-                ) {
-
+                if (challengeFinished) {
                     return;
-
                 }
 
 
                 remaining--;
 
 
-                get("timer")
-                    .textContent =
-                    remaining;
+                setText(
+                    "timer",
+                    remaining
+                );
 
 
-                if (
-                    remaining <= 0
-                ) {
+                if (remaining <= 0) {
 
                     clearInterval(
                         challengeTimer
                     );
 
-
-                    challengeTimer =
-                        null;
+                    challengeTimer = null;
 
 
-                    winLevel(
-                        score
-                    );
+                    winLevel(score);
 
                 }
 
@@ -2461,47 +2205,40 @@ function launchSurvival(challenge) {
 
 function startTimer(seconds) {
 
-    let remaining =
-        seconds;
+    let remaining = seconds;
 
 
-    get("timer")
-        .textContent =
-        remaining;
+    setText(
+        "timer",
+        remaining
+    );
 
 
     challengeTimer =
         setInterval(
             () => {
 
-                if (
-                    challengeFinished
-                ) {
-
+                if (challengeFinished) {
                     return;
-
                 }
 
 
                 remaining--;
 
 
-                get("timer")
-                    .textContent =
-                    remaining;
+                setText(
+                    "timer",
+                    remaining
+                );
 
 
-                if (
-                    remaining <= 0
-                ) {
+                if (remaining <= 0) {
 
                     clearInterval(
                         challengeTimer
                     );
 
-
-                    challengeTimer =
-                        null;
+                    challengeTimer = null;
 
 
                     loseLife();
@@ -2524,23 +2261,15 @@ function collision(a, b) {
     const aRect =
         a.getBoundingClientRect();
 
-
     const bRect =
         b.getBoundingClientRect();
 
 
     return !(
-        aRect.right <
-        bRect.left ||
-
-        aRect.left >
-        bRect.right ||
-
-        aRect.bottom <
-        bRect.top ||
-
-        aRect.top >
-        bRect.bottom
+        aRect.right < bRect.left ||
+        aRect.left > bRect.right ||
+        aRect.bottom < bRect.top ||
+        aRect.top > bRect.bottom
     );
 
 }
@@ -2556,23 +2285,23 @@ function loseLife() {
         !currentChallenge ||
         challengeFinished
     ) {
-
         return;
-
     }
 
 
     currentChallenge.lives--;
 
 
-    get("lives")
-        .textContent =
-        currentChallenge.lives;
+    setText(
+        "lives",
+        currentChallenge.lives
+    );
 
 
-    get("combo")
-        .textContent =
-        "0";
+    setText(
+        "combo",
+        "0"
+    );
 
 
     if (
@@ -2580,7 +2309,6 @@ function loseLife() {
     ) {
 
         failLevel();
-
         return;
 
     }
@@ -2599,18 +2327,12 @@ function loseLife() {
 
 function winLevel(score = 1) {
 
-    if (
-        challengeFinished
-    ) {
-
+    if (challengeFinished) {
         return;
-
     }
 
 
-    challengeFinished =
-        true;
-
+    challengeFinished = true;
 
     stopChallenge();
 
@@ -2620,9 +2342,7 @@ function winLevel(score = 1) {
 
 
     const baseReward =
-        getReward(
-            completed
-        );
+        getReward(completed);
 
 
     const scoreBonus =
@@ -2639,8 +2359,7 @@ function winLevel(score = 1) {
             1,
             4 -
             Math.floor(
-                currentChallenge.difficulty /
-                4
+                currentChallenge.difficulty / 4
             )
         );
 
@@ -2664,8 +2383,7 @@ function winLevel(score = 1) {
         perfectBonus;
 
 
-    game.coins +=
-        total;
+    game.coins += total;
 
 
     game.highestLevelCompleted =
@@ -2687,14 +2405,10 @@ function winLevel(score = 1) {
 
 
     saveGame();
-
-
     updateUI();
 
 
-    if (
-        completed === 200
-    ) {
+    if (completed === 200) {
 
         showToast(
             `👑 LEVEL 200 COMPLETE! +${total.toLocaleString()} 🪙`
@@ -2705,9 +2419,7 @@ function winLevel(score = 1) {
     }
 
 
-    if (
-        completed % 50 === 0
-    ) {
+    if (completed % 50 === 0) {
 
         showToast(
             `🌍 NEW WORLD UNLOCKED! +${total.toLocaleString()} 🪙`
@@ -2725,10 +2437,13 @@ function winLevel(score = 1) {
     setTimeout(
         () => {
 
+            const gameScreen =
+                get("gameScreen");
+
+
             if (
-                !get("gameScreen")
-                    .classList
-                    .contains("hidden")
+                gameScreen &&
+                !gameScreen.classList.contains("hidden")
             ) {
 
                 startLevel();
@@ -2748,16 +2463,20 @@ function winLevel(score = 1) {
 
 function failLevel() {
 
-    challengeFinished =
-        true;
+    if (challengeFinished) {
+        return;
+    }
 
+
+    challengeFinished = true;
 
     stopChallenge();
 
 
-    get("challengeMessage")
-        .textContent =
-        "💥 LEVEL FAILED";
+    setText(
+        "challengeMessage",
+        "💥 LEVEL FAILED"
+    );
 
 
     showToast(
@@ -2768,7 +2487,18 @@ function failLevel() {
     setTimeout(
         () => {
 
-            startLevel();
+            const gameScreen =
+                get("gameScreen");
+
+
+            if (
+                gameScreen &&
+                !gameScreen.classList.contains("hidden")
+            ) {
+
+                startLevel();
+
+            }
 
         },
         900
@@ -2781,37 +2511,32 @@ function failLevel() {
    TOAST
 ===================================================== */
 
-let toastTimeout =
-    null;
-
-
 function showToast(message) {
 
     const element =
         get("toast");
 
 
+    if (!element) {
+        return;
+    }
+
+
     element.textContent =
         message;
 
 
-    element.classList.add(
-        "show"
-    );
+    element.classList.add("show");
 
 
-    clearTimeout(
-        toastTimeout
-    );
+    clearTimeout(toastTimeout);
 
 
     toastTimeout =
         setTimeout(
             () => {
 
-                element.classList.remove(
-                    "show"
-                );
+                element.classList.remove("show");
 
             },
             2500
@@ -2831,33 +2556,25 @@ function updateCityTheme() {
 
 
     if (!map) {
-
         return;
-
     }
 
 
     const themes = {
 
         1: "theme-neon",
-
         2: "theme-tropical",
-
         3: "theme-frost",
-
         4: "theme-space"
 
     };
 
 
-    map.className =
-        "city-map";
+    map.className = "city-map";
 
 
     map.classList.add(
-        themes[
-            selectedWorldId
-        ] ||
+        themes[selectedWorldId] ||
         "theme-neon"
     );
 
@@ -2871,81 +2588,84 @@ function updateCityTheme() {
 function renderCity() {
 
     const world =
-        getWorldById(
-            selectedWorldId
-        );
+        getWorldById(selectedWorldId);
 
 
     if (!world) {
-
         return;
-
     }
 
 
     updateCityTheme();
 
 
-    get("cityWorldBadge")
-        .textContent =
+    setText(
+        "cityWorldBadge",
         `WORLD ${
             String(world.id)
-                .padStart(
-                    2,
-                    "0"
-                )
-        }`;
+                .padStart(2, "0")
+        }`
+    );
 
 
-    get("cityWorldName")
-        .textContent =
-        world.name;
+    setText(
+        "cityWorldName",
+        world.name
+    );
 
 
-    get("selectedWorldNumber")
-        .textContent =
-        `WORLD ${world.id}`;
+    setText(
+        "selectedWorldNumber",
+        `WORLD ${world.id}`
+    );
 
 
     const unlocked =
-        isWorldUnlocked(
-            world
-        );
+        isWorldUnlocked(world);
 
 
-    get("lockedWorldMessage")
-        .classList.toggle(
+    const lockedMessage =
+        get("lockedWorldMessage");
+
+
+    const cityContent =
+        get("cityContent");
+
+
+    if (lockedMessage) {
+
+        lockedMessage.classList.toggle(
             "hidden",
             unlocked
         );
 
+    }
 
-    get("cityContent")
-        .classList.toggle(
+
+    if (cityContent) {
+
+        cityContent.classList.toggle(
             "hidden",
             !unlocked
         );
 
+    }
+
 
     if (!unlocked) {
 
-        get("unlockRequirement")
-            .textContent =
-            `Complete level ${world.unlock} to unlock this world.`;
+        setText(
+            "unlockRequirement",
+            `Complete level ${world.unlock} to unlock this world.`
+        );
 
         return;
 
     }
 
 
-    renderBuildings(
-        world
-    );
-
-
-    renderBuildingShop(
-        world
-    );
+    renderBuildings(world);
+    renderBuildingShop(world);
 
 }
 
@@ -2960,18 +2680,19 @@ function renderBuildings(world) {
         get("cityGrid");
 
 
-    grid.innerHTML =
-        "";
+    if (!grid) {
+        return;
+    }
+
+
+    grid.innerHTML = "";
 
 
     const owned =
-        game.cities[
-            world.id
-        ] || [];
+        game.cities[world.id] || [];
 
 
-    const totalSlots =
-        12;
+    const totalSlots = 12;
 
 
     for (
@@ -2985,9 +2706,7 @@ function renderBuildings(world) {
 
 
         const slot =
-            document.createElement(
-                "div"
-            );
+            document.createElement("div");
 
 
         if (!buildingId) {
@@ -3000,35 +2719,22 @@ function renderBuildings(world) {
                 "🏗️";
 
 
-            slot.style.display =
-                "flex";
-
-
-            slot.style.alignItems =
-                "center";
-
-
-            slot.style.justifyContent =
-                "center";
-
-
-            slot.style.opacity =
-                "0.35";
+            slot.style.display = "flex";
+            slot.style.alignItems = "center";
+            slot.style.justifyContent = "center";
+            slot.style.opacity = "0.35";
 
         } else {
 
             const building =
                 world.buildings.find(
                     item =>
-                        item.id ===
-                        buildingId
+                        item.id === buildingId
                 );
 
 
             if (!building) {
-
                 continue;
-
             }
 
 
@@ -3037,7 +2743,6 @@ function renderBuildings(world) {
 
 
             slot.innerHTML = `
-
                 <div class="building-icon">
                     ${building.icon}
                 </div>
@@ -3045,15 +2750,12 @@ function renderBuildings(world) {
                 <div class="building-name">
                     ${building.name}
                 </div>
-
             `;
 
         }
 
 
-        grid.appendChild(
-            slot
-        );
+        grid.appendChild(slot);
 
     }
 
@@ -3070,19 +2772,20 @@ function renderBuildingShop(world) {
         get("buildingShop");
 
 
-    shop.innerHTML =
-        "";
+    if (!shop) {
+        return;
+    }
+
+
+    shop.innerHTML = "";
 
 
     for (
-        const building of
-        world.buildings
+        const building of world.buildings
     ) {
 
         const card =
-            document.createElement(
-                "div"
-            );
+            document.createElement("div");
 
 
         card.className =
@@ -3091,16 +2794,13 @@ function renderBuildingShop(world) {
 
         const owned =
             (
-                game.cities[
-                    world.id
-                ] || []
+                game.cities[world.id] || []
             ).includes(
                 building.id
             );
 
 
         card.innerHTML = `
-
             <div class="building-icon">
                 ${building.icon}
             </div>
@@ -3112,18 +2812,14 @@ function renderBuildingShop(world) {
             <div>
                 ${building.price.toLocaleString()} 🪙
             </div>
-
         `;
 
 
         const button =
-            document.createElement(
-                "button"
-            );
+            document.createElement("button");
 
 
-        button.type =
-            "button";
+        button.type = "button";
 
 
         button.textContent =
@@ -3132,11 +2828,11 @@ function renderBuildingShop(world) {
                 : "BUILD";
 
 
-        button.disabled =
-            owned;
+        button.disabled = owned;
 
 
-        button.onclick =
+        button.addEventListener(
+            "click",
             () => {
 
                 buyBuilding(
@@ -3144,17 +2840,13 @@ function renderBuildingShop(world) {
                     building
                 );
 
-            };
-
-
-        card.appendChild(
-            button
+            }
         );
 
 
-        shop.appendChild(
-            card
-        );
+        card.appendChild(button);
+
+        shop.appendChild(card);
 
     }
 
@@ -3170,21 +2862,13 @@ function buyBuilding(
     building
 ) {
 
-    if (
-        !isWorldUnlocked(
-            world
-        )
-    ) {
-
+    if (!isWorldUnlocked(world)) {
         return;
-
     }
 
 
     const owned =
-        game.cities[
-            world.id
-        ] || [];
+        game.cities[world.id] || [];
 
 
     if (
@@ -3225,17 +2909,13 @@ function buyBuilding(
     );
 
 
-    game.cities[
-        world.id
-    ] =
+    game.cities[world.id] =
         owned;
 
 
     saveGame();
 
-
     updateUI();
-
 
     renderCity();
 
@@ -3253,8 +2933,33 @@ function buyBuilding(
 
 function setupEvents() {
 
-    get("playButton")
-        .addEventListener(
+    const playButton =
+        get("playButton");
+
+
+    const cityButton =
+        get("cityButton");
+
+
+    const backButton =
+        get("backButton");
+
+
+    const cityBackButton =
+        get("cityBackButton");
+
+
+    const previousWorldButton =
+        get("previousWorldButton");
+
+
+    const nextWorldButton =
+        get("nextWorldButton");
+
+
+    if (playButton) {
+
+        playButton.addEventListener(
             "click",
             () => {
 
@@ -3265,15 +2970,17 @@ function setupEvents() {
 
                 updateUI();
 
-
                 startLevel();
 
             }
         );
 
+    }
 
-    get("cityButton")
-        .addEventListener(
+
+    if (cityButton) {
+
+        cityButton.addEventListener(
             "click",
             () => {
 
@@ -3293,9 +3000,12 @@ function setupEvents() {
             }
         );
 
+    }
 
-    get("backButton")
-        .addEventListener(
+
+    if (backButton) {
+
+        backButton.addEventListener(
             "click",
             () => {
 
@@ -3309,9 +3019,12 @@ function setupEvents() {
             }
         );
 
+    }
 
-    get("cityBackButton")
-        .addEventListener(
+
+    if (cityBackButton) {
+
+        cityBackButton.addEventListener(
             "click",
             () => {
 
@@ -3322,9 +3035,12 @@ function setupEvents() {
             }
         );
 
+    }
 
-    get("previousWorldButton")
-        .addEventListener(
+
+    if (previousWorldButton) {
+
+        previousWorldButton.addEventListener(
             "click",
             () => {
 
@@ -3340,9 +3056,12 @@ function setupEvents() {
             }
         );
 
+    }
 
-    get("nextWorldButton")
-        .addEventListener(
+
+    if (nextWorldButton) {
+
+        nextWorldButton.addEventListener(
             "click",
             () => {
 
@@ -3357,6 +3076,8 @@ function setupEvents() {
 
             }
         );
+
+    }
 
 }
 
