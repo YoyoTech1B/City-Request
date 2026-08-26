@@ -4,7 +4,7 @@
    CITY QUEST SERVICE WORKER
 ========================================= */
 
-const CACHE_NAME = "city-quest-v1";
+const CACHE_NAME = "city-quest-v2";
 
 const FILES_TO_CACHE = [
     "./",
