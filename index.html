@@ -5,7 +5,7 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
 
     <meta
@@ -35,7 +35,6 @@
         rel="manifest"
         href="manifest.json"
     >
-<link rel="icon" type="image/png" href="favicon.png">
 </head>
 
 <body>
@@ -49,17 +48,24 @@
         <header class="topbar">
 
             <div class="logo">
-                🏙️ CITY QUEST
+                <span class="logo-icon">🏙️</span>
+                <span>CITY QUEST</span>
             </div>
 
             <div class="stats">
 
-                <div class="stat">
+                <div
+                    class="stat stat-coins"
+                    aria-label="Coins"
+                >
                     🪙
                     <span id="coins">0</span>
                 </div>
 
-                <div class="stat">
+                <div
+                    class="stat stat-level"
+                    aria-label="Current level"
+                >
                     ⭐
                     <span id="level">1</span>/200
                 </div>
@@ -78,7 +84,14 @@
             class="hero"
         >
 
+            <div class="hero-background-grid"></div>
+
             <div class="hero-content">
+
+                <div class="hero-status">
+                    <span class="status-dot"></span>
+                    SYSTEM ONLINE
+                </div>
 
                 <div
                     id="homeWorldBadge"
@@ -91,11 +104,32 @@
                     NEON CITY
                 </h1>
 
+                <div class="hero-divider"></div>
+
                 <p>
                     Beat challenges.
                     Earn coins.
                     Build your city.
                 </p>
+
+                <div class="hero-mini-stats">
+
+                    <div>
+                        <strong>200</strong>
+                        <span>LEVELS</span>
+                    </div>
+
+                    <div>
+                        <strong>4</strong>
+                        <span>WORLDS</span>
+                    </div>
+
+                    <div>
+                        <strong>∞</strong>
+                        <span>BUILD</span>
+                    </div>
+
+                </div>
 
                 <div class="buttons">
 
@@ -104,7 +138,8 @@
                         class="primary-button"
                         type="button"
                     >
-                        PLAY ▶
+                        <span>PLAY</span>
+                        <span class="button-arrow">▶</span>
                     </button>
 
                     <button
@@ -112,7 +147,8 @@
                         class="secondary-button"
                         type="button"
                     >
-                        MY CITY 🏙️
+                        <span>MY CITY</span>
+                        <span>🏙️</span>
                     </button>
 
                 </div>
@@ -142,21 +178,38 @@
 
             <div class="game-card">
 
-                <div
-                    id="gameWorldBadge"
-                    class="world-badge"
-                >
-                    WORLD 01
+                <div class="game-card-top">
+
+                    <div>
+
+                        <div
+                            id="gameWorldBadge"
+                            class="world-badge"
+                        >
+                            WORLD 01
+                        </div>
+
+                        <h2>
+                            LEVEL
+                            <span id="currentLevel">
+                                1
+                            </span>
+                        </h2>
+
+                    </div>
+
+                    <div class="game-status">
+                        <span class="status-dot"></span>
+                        ACTIVE
+                    </div>
+
                 </div>
 
-                <h2>
-                    LEVEL
-                    <span id="currentLevel">
-                        1
-                    </span>
-                </h2>
 
-                <p id="challengeTitle">
+                <p
+                    id="challengeTitle"
+                    class="challenge-name"
+                >
                     Get ready...
                 </p>
 
@@ -183,25 +236,22 @@
                         class="challenge-hud"
                     >
 
-                        <div>
-                            ❤️
-                            <span id="lives">
-                                3
-                            </span>
+                        <div class="hud-item">
+                            <span class="hud-icon">❤️</span>
+                            <span class="hud-label">LIVES</span>
+                            <strong id="lives">3</strong>
                         </div>
 
-                        <div>
-                            🔥
-                            <span id="combo">
-                                0
-                            </span>
+                        <div class="hud-item">
+                            <span class="hud-icon">🔥</span>
+                            <span class="hud-label">COMBO</span>
+                            <strong id="combo">0</strong>
                         </div>
 
-                        <div>
-                            ⏱️
-                            <span id="timer">
-                                --
-                            </span>
+                        <div class="hud-item">
+                            <span class="hud-icon">⏱️</span>
+                            <span class="hud-label">TIME</span>
+                            <strong id="timer">--</strong>
                         </div>
 
                     </div>
@@ -232,6 +282,7 @@
                     <div
                         id="challengeMessage"
                         class="challenge-message"
+                        aria-live="polite"
                     >
                     </div>
 
@@ -285,6 +336,7 @@
                         <button
                             id="previousWorldButton"
                             type="button"
+                            aria-label="Previous world"
                         >
                             ←
                         </button>
@@ -296,6 +348,7 @@
                         <button
                             id="nextWorldButton"
                             type="button"
+                            aria-label="Next world"
                         >
                             →
                         </button>
@@ -312,7 +365,13 @@
                     class="locked-message hidden"
                 >
 
-                    🔒 THIS WORLD IS LOCKED
+                    <div class="locked-icon">
+                        🔒
+                    </div>
+
+                    <strong>
+                        THIS WORLD IS LOCKED
+                    </strong>
 
                     <p id="unlockRequirement">
                         Complete more levels.
@@ -331,6 +390,8 @@
                     >
 
                         <div class="city-sky"></div>
+
+                        <div class="city-stars"></div>
 
                         <div class="city-ground"></div>
 
@@ -354,6 +415,10 @@
                     <h3 class="build-title">
                         BUILD YOUR CITY
                     </h3>
+
+                    <p class="build-subtitle">
+                        Spend your coins to expand your world.
+                    </p>
 
 
                     <div
